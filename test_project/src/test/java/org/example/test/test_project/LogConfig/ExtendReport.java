@@ -14,7 +14,7 @@ public class ExtendReport {
         if (extent == null) {
             // Format ngày tháng
             String timestamp = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            String logPath = "./src/test/java/org/example/test/test_project/Logs/TestReport_" + timestamp + ".html";
+            String logPath = "./src/test/java/org/example/test/test_project/Logs/RatingAndCommentAPIReport_" + timestamp + ".html";
 
             ExtentSparkReporter reporter = new ExtentSparkReporter(logPath);
             reporter.config().setReportName("Automation Test Report - " + timestamp);
@@ -24,7 +24,7 @@ public class ExtendReport {
         }
         return extent;
     }
-    // Gọi khi kết thúc test để ghi dữ liệu vào file
+
     public static void closeReport() {
         if (extent != null) {
             extent.flush();

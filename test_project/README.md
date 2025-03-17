@@ -1,6 +1,6 @@
-# Running Guide
 
-## Test Front End
+
+## Test Front End (UI/UX)
 
 ### Test Register Page
 mvn test -Dtest=RegisterPage
@@ -12,3 +12,8 @@ mvn test -Dtest=LoginPage
 mvn test -Dtest=BookDetailPage
 
 ## Test Back End (API)
+### Test Book API
+mvn test -Dtest=BookAPI
+
+### Test comment and Rating API
+mvn test -Dtest=CommentAndRatingAPI
