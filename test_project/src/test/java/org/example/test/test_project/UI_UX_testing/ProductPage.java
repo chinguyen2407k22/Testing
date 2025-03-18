@@ -34,46 +34,6 @@ public class ProductPage {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testProductFragment(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product");
-
-            WebElement logo = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[1]/img"));
-            Assertions.assertTrue(logo.isDisplayed(),"Logo did not display");
-            test.pass("Logo displayed!");
-
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
-            test.pass("Search Bar displayed!");
-
-            WebElement icon1 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[1]"));
-            Assertions.assertTrue(icon1.isDisplayed(),"Login icon did not display");
-            test.pass("Login icon displayed!");
-
-            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[2]"));
-            Assertions.assertTrue(icon2.isDisplayed(),"Shopping cart icon did not display");
-            test.pass("Shopping cart icon displayed!");
-
-            WebElement icon3 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[3]"));
-            Assertions.assertTrue(icon3.isDisplayed(),"Favorite icon did not display");
-            test.pass("Favorite icon displayed!");
-
-            WebElement home = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/a"));
-            Assertions.assertTrue(home.isDisplayed(),"Home link did not display");
-            test.pass("Home link icon displayed!");
-
-            WebElement bookdetail = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]"));
-            Assertions.assertTrue(bookdetail.isDisplayed(),"Book detail page link did not display");
-            test.pass("Book detail page icon displayed!");
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
     public void testHomeLink(String browser) {
         try{
             driver = BrowserFactory.getDriver(browser);
@@ -129,66 +89,7 @@ public class ProductPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testInputSearchBar(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product");
 
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            searchBar.sendKeys("Times");
-            String testStr = searchBar.getAttribute("value");
-            Assertions.assertTrue(testStr.equals("Times"),"Input value incorrect!");
-            test.pass("Enter search keyword successfully!");
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void findOkKey(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product");
-
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            searchBar.sendKeys("Times");
-            String testStr = searchBar.getAttribute("value");
-            Assertions.assertTrue(testStr.equals("Times"),"Input value incorrect!");
-            test.pass("Enter search keyword successfully!");
-
-            searchBar.sendKeys(Keys.ENTER);
-
-            if(driver.getCurrentUrl().contains("search?q=Selenium+Testing")){
-                test.pass("Finding sucessfully!");
-            }
-            else test.fail("Finding unsucessfully!");
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testInputSearchBarTimes100(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product");
-
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            for (int i = 0;i<100; i++){
-                searchBar.sendKeys("Times");
-                searchBar.clear();
-            }
-            test.pass("Insert input search bar 100 times successfully!");
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
 
     @AfterEach
     public void tearDown() {

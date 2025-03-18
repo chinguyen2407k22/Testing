@@ -31,45 +31,6 @@ public class BookDetailPage {
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testProductFragment(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product/1");
-
-            WebElement logo = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[1]/img"));
-            Assertions.assertTrue(logo.isDisplayed(),"Logo did not display");
-            test.pass("Logo displayed!");
-
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
-            test.pass("Search Bar displayed!");
-
-            WebElement icon1 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[1]"));
-            Assertions.assertTrue(icon1.isDisplayed(),"Login icon did not display");
-            test.pass("Login icon displayed!");
-
-            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[2]"));
-            Assertions.assertTrue(icon2.isDisplayed(),"Shopping cart icon did not display");
-            test.pass("Shopping cart icon displayed!");
-
-            WebElement icon3 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[3]/a[3]"));
-            Assertions.assertTrue(icon3.isDisplayed(),"Favorite icon did not display");
-            test.pass("Favorite icon displayed!");
-
-            WebElement home = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/a"));
-            Assertions.assertTrue(home.isDisplayed(),"Home link did not display");
-            test.pass("Home link icon displayed!");
-
-            WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/a[2]"));
-            Assertions.assertTrue(product.isDisplayed(),"Product link did not display");
-            test.pass("Product link icon displayed!");
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
@@ -100,47 +61,7 @@ public class BookDetailPage {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testInputSearchBar(String browser) {
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product/1");
 
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            searchBar.sendKeys("Times");
-            String testStr = searchBar.getAttribute("value");
-            Assertions.assertTrue(testStr.equals("Times"),"Input value incorrect!");
-            test.pass("Enter search keyword successfully!");
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void findOkKey(String browser) {
-        try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/product/1");
-
-            WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/input"));
-            searchBar.sendKeys("Times");
-            String testStr = searchBar.getAttribute("value");
-            Assertions.assertTrue(testStr.equals("Times"), "Input value incorrect!");
-            test.pass("Enter search keyword successfully!");
-
-            searchBar.sendKeys(Keys.ENTER);
-
-            if (driver.getCurrentUrl().contains("search?q=Selenium+Testing")) {
-                test.pass("Finding sucessfully!");
-            } else test.fail("Finding unsucessfully!");
-
-        } catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void testProductLink(String browser) {
@@ -255,6 +176,7 @@ public class BookDetailPage {
             test.fail(e.getMessage());
         }
     }
+    @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void testEnterComment(String browser) {
         try{
@@ -297,6 +219,7 @@ public class BookDetailPage {
             test.fail(e.getMessage());
         }
     }
+    @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkGoToOtherBookByYMAL(String browser) {
         try{

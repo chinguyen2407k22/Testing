@@ -1,0 +1,2847 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Automation Test Report - 2025-03-18</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Mar 18, 2025 09:48:59 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="fail" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:48:59</p>
+            <p class="text-sm">
+              <span>9:48:59 PM</span> / <span>00:00:05:612</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[1] browser=chrome - 2025-03-18 21:48:59</h5>
+<span class='badge badge-success'>03.18.2025 9:48:59 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:49:05 PM</span>
+<span class='badge badge-default'>00:00:05:612</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:49:05 PM</td>
+        <td>
+          element not interactable
+  (Session info: chrome=134.0.6998.89)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [651408fdb3eae15a5eeff6fb6878e950, sendKeysToElement {id=f.E6B511FCEC138F711785817C58A8F0CE.d.39F9C286D96416D7527857F5F88FFF1D.e.4, value=[Ljava.lang.CharSequence;@589b028e}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 134.0.6998.89, chrome: {chromedriverVersion: 134.0.6998.88 (7e3d5c978c6d..., userDataDir: C:\Users\nguye\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49737}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49737/devtoo..., se:cdpVersion: 134.0.6998.89, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (651408fdb3eae15a5eeff6fb6878e950)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: 651408fdb3eae15a5eeff6fb6878e950
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:49:05</p>
+            <p class="text-sm">
+              <span>9:49:05 PM</span> / <span>00:00:04:685</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[2] browser=edge - 2025-03-18 21:49:05</h5>
+<span class='badge badge-success'>03.18.2025 9:49:05 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:49:10 PM</span>
+<span class='badge badge-default'>00:00:04:685</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:49:10 PM</td>
+        <td>
+          element not interactable
+  (Session info: MicrosoftEdge=134.0.3124.72)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [d0ae9f98aedc5e5616a62b020fa78c62, sendKeysToElement {id=f.7E85A7CC855CD993A7D84BA57A0A3E02.d.F330C7140D84ABCC9DAD593D3DB23D85.e.5, value=[Ljava.lang.CharSequence;@421a4ee1}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 134.0.3124.72, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:49772}, msedge: {msedgedriverVersion: 134.0.3124.72 (c81e2c3854de..., userDataDir: C:\Users\nguye\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49772/devtoo..., se:cdpVersion: 134.0.3124.72, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[EdgeDriver: MicrosoftEdge on windows (d0ae9f98aedc5e5616a62b020fa78c62)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: d0ae9f98aedc5e5616a62b020fa78c62
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:49:11</p>
+            <p class="text-sm">
+              <span>9:49:11 PM</span> / <span>00:00:08:957</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[3] browser=firefox - 2025-03-18 21:49:11</h5>
+<span class='badge badge-success'>03.18.2025 9:49:11 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:49:20 PM</span>
+<span class='badge badge-default'>00:00:08:957</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:49:20 PM</td>
+        <td>
+          Element <div> is not reachable by keyboard
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [bad28cd0-3712-4ad1-9f7d-a07248557384, sendKeysToElement {id=a48263ba-4d3c-4883-b6cb-c382bcbbbe32, value=[Ljava.lang.CharSequence;@442f92e6}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 135.0.1, moz:accessibilityChecks: false, moz:buildID: 20250216192613, moz:debuggerAddress: 127.0.0.1:31059, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 9552, moz:profile: C:\Users\nguye\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:31059/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (bad28cd0-3712-4ad1-9f7d-a07248557384)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: bad28cd0-3712-4ad1-9f7d-a07248557384
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:49:21</p>
+            <p class="text-sm">
+              <span>9:49:21 PM</span> / <span>00:00:05:025</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:49:21</h5>
+<span class='badge badge-success'>03.18.2025 9:49:21 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:49:26 PM</span>
+<span class='badge badge-default'>00:00:05:025</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:49:26 PM</td>
+        <td>
+          Changed to recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:49:27</p>
+            <p class="text-sm">
+              <span>9:49:27 PM</span> / <span>00:00:03:854</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:49:27</h5>
+<span class='badge badge-success'>03.18.2025 9:49:27 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:49:31 PM</span>
+<span class='badge badge-default'>00:00:03:854</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:49:31 PM</td>
+        <td>
+          Changed to recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:49:32</p>
+            <p class="text-sm">
+              <span>9:49:32 PM</span> / <span>00:01:11:600</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:49:32</h5>
+<span class='badge badge-success'>03.18.2025 9:49:32 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:50:43 PM</span>
+<span class='badge badge-default'>00:01:11:600</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:50:43 PM</td>
+        <td>
+          Changed to recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:50:45</p>
+            <p class="text-sm">
+              <span>9:50:45 PM</span> / <span>00:00:08:084</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:50:45</h5>
+<span class='badge badge-success'>03.18.2025 9:50:45 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:50:53 PM</span>
+<span class='badge badge-default'>00:00:08:084</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:50:53 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:50:55</p>
+            <p class="text-sm">
+              <span>9:50:55 PM</span> / <span>00:00:06:750</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:50:55</h5>
+<span class='badge badge-success'>03.18.2025 9:50:55 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:01 PM</span>
+<span class='badge badge-default'>00:00:06:750</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:51:01 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:51:03</p>
+            <p class="text-sm">
+              <span>9:51:03 PM</span> / <span>00:00:13:490</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:51:03</h5>
+<span class='badge badge-success'>03.18.2025 9:51:03 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:17 PM</span>
+<span class='badge badge-default'>00:00:13:490</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:51:17 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:51:18</p>
+            <p class="text-sm">
+              <span>9:51:18 PM</span> / <span>00:00:06:978</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:51:18</h5>
+<span class='badge badge-success'>03.18.2025 9:51:18 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:25 PM</span>
+<span class='badge badge-default'>00:00:06:978</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:51:25 PM</td>
+        <td>
+          Changed to next new release book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:51:25</p>
+            <p class="text-sm">
+              <span>9:51:25 PM</span> / <span>00:00:04:373</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:51:25</h5>
+<span class='badge badge-success'>03.18.2025 9:51:25 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:30 PM</span>
+<span class='badge badge-default'>00:00:04:373</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:51:30 PM</td>
+        <td>
+          Changed to next new release book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:51:31</p>
+            <p class="text-sm">
+              <span>9:51:31 PM</span> / <span>00:00:09:067</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:51:31</h5>
+<span class='badge badge-success'>03.18.2025 9:51:31 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:40 PM</span>
+<span class='badge badge-default'>00:00:09:067</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:51:40 PM</td>
+        <td>
+          Changed to next new release book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:51:42</p>
+            <p class="text-sm">
+              <span>9:51:42 PM</span> / <span>00:00:04:379</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[1] browser=chrome - 2025-03-18 21:51:42</h5>
+<span class='badge badge-success'>03.18.2025 9:51:42 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:46 PM</span>
+<span class='badge badge-default'>00:00:04:379</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:51:46 PM</td>
+        <td>
+          element not interactable
+  (Session info: chrome=134.0.6998.89)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [08269902a326b155875cbdd1a535f3ad, sendKeysToElement {id=f.36E79A2C6A97198AEB42E3B79742E199.d.D757D8C7C3189C52E387B111EE7E4F64.e.4, value=[Ljava.lang.CharSequence;@ebe067d}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 134.0.6998.89, chrome: {chromedriverVersion: 134.0.6998.88 (7e3d5c978c6d..., userDataDir: C:\Users\nguye\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50834}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50834/devtoo..., se:cdpVersion: 134.0.6998.89, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (08269902a326b155875cbdd1a535f3ad)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: 08269902a326b155875cbdd1a535f3ad
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:51:46</p>
+            <p class="text-sm">
+              <span>9:51:46 PM</span> / <span>00:00:06:003</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[2] browser=edge - 2025-03-18 21:51:46</h5>
+<span class='badge badge-success'>03.18.2025 9:51:46 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:51:52 PM</span>
+<span class='badge badge-default'>00:00:06:003</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:51:52 PM</td>
+        <td>
+          element not interactable
+  (Session info: MicrosoftEdge=134.0.3124.72)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [24da3093e8be48122d647895b6d75ae7, sendKeysToElement {id=f.F09A46647F54760FB2E156AA3220A04B.d.A242EE86E01D3D23F304386BC2DBC746.e.3, value=[Ljava.lang.CharSequence;@62a68bcb}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 134.0.3124.72, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:50864}, msedge: {msedgedriverVersion: 134.0.3124.72 (c81e2c3854de..., userDataDir: C:\Users\nguye\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50864/devtoo..., se:cdpVersion: 134.0.3124.72, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[EdgeDriver: MicrosoftEdge on windows (24da3093e8be48122d647895b6d75ae7)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: 24da3093e8be48122d647895b6d75ae7
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:51:54</p>
+            <p class="text-sm">
+              <span>9:51:54 PM</span> / <span>00:00:08:562</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">[3] browser=firefox - 2025-03-18 21:51:54</h5>
+<span class='badge badge-success'>03.18.2025 9:51:54 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:02 PM</span>
+<span class='badge badge-default'>00:00:08:562</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>9:52:02 PM</td>
+        <td>
+          Element <div> is not reachable by keyboard
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [7b360132-0f17-4ac7-9167-dfe7f9fc258c, sendKeysToElement {id=84104356-19f4-4f23-8bb0-16a4dd1df297, value=[Ljava.lang.CharSequence;@45900b64}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 135.0.1, moz:accessibilityChecks: false, moz:buildID: 20250216192613, moz:debuggerAddress: 127.0.0.1:30409, moz:geckodriverVersion: 0.36.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 10796, moz:profile: C:\Users\nguye\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:30409/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (7b360132-0f17-4ac7-9167-dfe7f9fc258c)] -> xpath: //*[@id="root"]/main/div/div[5]/div/div]
+Session ID: 7b360132-0f17-4ac7-9167-dfe7f9fc258c
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:52:04</p>
+            <p class="text-sm">
+              <span>9:52:04 PM</span> / <span>00:00:07:875</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:52:04</h5>
+<span class='badge badge-success'>03.18.2025 9:52:04 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:12 PM</span>
+<span class='badge badge-default'>00:00:07:875</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:12 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:52:12</p>
+            <p class="text-sm">
+              <span>9:52:12 PM</span> / <span>00:00:06:935</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:52:12</h5>
+<span class='badge badge-success'>03.18.2025 9:52:12 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:19 PM</span>
+<span class='badge badge-default'>00:00:06:935</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:19 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:52:21</p>
+            <p class="text-sm">
+              <span>9:52:21 PM</span> / <span>00:00:12:978</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:52:21</h5>
+<span class='badge badge-success'>03.18.2025 9:52:21 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:34 PM</span>
+<span class='badge badge-default'>00:00:12:978</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:34 PM</td>
+        <td>
+          Change to product page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:52:35</p>
+            <p class="text-sm">
+              <span>9:52:35 PM</span> / <span>00:00:05:543</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:52:35</h5>
+<span class='badge badge-success'>03.18.2025 9:52:35 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:41 PM</span>
+<span class='badge badge-default'>00:00:05:543</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:41 PM</td>
+        <td>
+          Hot Book Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="20"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:52:41</p>
+            <p class="text-sm">
+              <span>9:52:41 PM</span> / <span>00:00:03:939</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:52:41</h5>
+<span class='badge badge-success'>03.18.2025 9:52:41 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:52:45 PM</span>
+<span class='badge badge-default'>00:00:03:939</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:52:45 PM</td>
+        <td>
+          Hot Book Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="21"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:52:46</p>
+            <p class="text-sm">
+              <span>9:52:46 PM</span> / <span>00:01:10:541</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:52:46</h5>
+<span class='badge badge-success'>03.18.2025 9:52:46 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:53:57 PM</span>
+<span class='badge badge-default'>00:01:10:541</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:53:57 PM</td>
+        <td>
+          Hot Book Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="22"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:53:58</p>
+            <p class="text-sm">
+              <span>9:53:58 PM</span> / <span>00:00:05:453</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:53:58</h5>
+<span class='badge badge-success'>03.18.2025 9:53:58 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:54:03 PM</span>
+<span class='badge badge-default'>00:00:05:453</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:54:03 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="23"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:54:04</p>
+            <p class="text-sm">
+              <span>9:54:04 PM</span> / <span>00:00:03:222</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:54:04</h5>
+<span class='badge badge-success'>03.18.2025 9:54:04 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:54:07 PM</span>
+<span class='badge badge-default'>00:00:03:222</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:54:07 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="24"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:54:09</p>
+            <p class="text-sm">
+              <span>9:54:09 PM</span> / <span>00:01:09:474</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:54:09</h5>
+<span class='badge badge-success'>03.18.2025 9:54:09 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:55:18 PM</span>
+<span class='badge badge-default'>00:01:09:474</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:18 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="25"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:55:19</p>
+            <p class="text-sm">
+              <span>9:55:19 PM</span> / <span>00:00:05:746</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:55:19</h5>
+<span class='badge badge-success'>03.18.2025 9:55:19 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:55:25 PM</span>
+<span class='badge badge-default'>00:00:05:746</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=25</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:25 PM</td>
+        <td>
+          New Release field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:25 PM</td>
+        <td>
+          New Release Index Button  displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:25 PM</td>
+        <td>
+          New Release Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:25 PM</td>
+        <td>
+          New Release View All Product Button  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="26"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:55:25</p>
+            <p class="text-sm">
+              <span>9:55:25 PM</span> / <span>00:00:03:373</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:55:25</h5>
+<span class='badge badge-success'>03.18.2025 9:55:25 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:55:29 PM</span>
+<span class='badge badge-default'>00:00:03:373</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=26</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:29 PM</td>
+        <td>
+          New Release field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:29 PM</td>
+        <td>
+          New Release Index Button  displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:29 PM</td>
+        <td>
+          New Release Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:55:29 PM</td>
+        <td>
+          New Release View All Product Button  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="27"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:55:30</p>
+            <p class="text-sm">
+              <span>9:55:30 PM</span> / <span>00:01:09:339</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:55:30</h5>
+<span class='badge badge-success'>03.18.2025 9:55:30 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:56:39 PM</span>
+<span class='badge badge-default'>00:01:09:339</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=27</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:39 PM</td>
+        <td>
+          New Release field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:39 PM</td>
+        <td>
+          New Release Index Button  displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:39 PM</td>
+        <td>
+          New Release Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:39 PM</td>
+        <td>
+          New Release View All Product Button  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="28"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:56:41</p>
+            <p class="text-sm">
+              <span>9:56:41 PM</span> / <span>00:00:04:393</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:56:41</h5>
+<span class='badge badge-success'>03.18.2025 9:56:41 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:56:45 PM</span>
+<span class='badge badge-default'>00:00:04:393</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=28</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:45 PM</td>
+        <td>
+          Subcribe field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:45 PM</td>
+        <td>
+          Subcribe fielddisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:45 PM</td>
+        <td>
+          Subcribe Email Box  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="29"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:56:45</p>
+            <p class="text-sm">
+              <span>9:56:45 PM</span> / <span>00:00:02:932</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:56:45</h5>
+<span class='badge badge-success'>03.18.2025 9:56:45 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:56:48 PM</span>
+<span class='badge badge-default'>00:00:02:932</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=29</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:48 PM</td>
+        <td>
+          Subcribe field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:48 PM</td>
+        <td>
+          Subcribe fielddisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:56:48 PM</td>
+        <td>
+          Subcribe Email Box  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="30"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:56:50</p>
+            <p class="text-sm">
+              <span>9:56:50 PM</span> / <span>00:01:09:432</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:56:50</h5>
+<span class='badge badge-success'>03.18.2025 9:56:50 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:57:59 PM</span>
+<span class='badge badge-default'>00:01:09:432</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=30</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:57:59 PM</td>
+        <td>
+          Subcribe field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:57:59 PM</td>
+        <td>
+          Subcribe fielddisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:57:59 PM</td>
+        <td>
+          Subcribe Email Box  displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="31"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:58:01</p>
+            <p class="text-sm">
+              <span>9:58:01 PM</span> / <span>00:00:04:916</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:58:01</h5>
+<span class='badge badge-success'>03.18.2025 9:58:01 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:58:06 PM</span>
+<span class='badge badge-default'>00:00:04:916</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=31</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:58:06 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="32"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:58:06</p>
+            <p class="text-sm">
+              <span>9:58:06 PM</span> / <span>00:00:03:934</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:58:06</h5>
+<span class='badge badge-success'>03.18.2025 9:58:06 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:58:10 PM</span>
+<span class='badge badge-default'>00:00:03:934</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=32</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:58:10 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="33"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:58:12</p>
+            <p class="text-sm">
+              <span>9:58:12 PM</span> / <span>00:01:09:261</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:58:12</h5>
+<span class='badge badge-success'>03.18.2025 9:58:12 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:59:21 PM</span>
+<span class='badge badge-default'>00:01:09:261</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=33</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:59:21 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="34"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 21:59:22</p>
+            <p class="text-sm">
+              <span>9:59:22 PM</span> / <span>00:00:11:652</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 21:59:22</h5>
+<span class='badge badge-success'>03.18.2025 9:59:22 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:59:34 PM</span>
+<span class='badge badge-default'>00:00:11:652</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=34</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:59:34 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="35"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 21:59:34</p>
+            <p class="text-sm">
+              <span>9:59:34 PM</span> / <span>00:00:10:848</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 21:59:34</h5>
+<span class='badge badge-success'>03.18.2025 9:59:34 PM</span>
+<span class='badge badge-danger'>03.18.2025 9:59:45 PM</span>
+<span class='badge badge-default'>00:00:10:848</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=35</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>9:59:45 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="36"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 21:59:47</p>
+            <p class="text-sm">
+              <span>9:59:47 PM</span> / <span>00:01:18:071</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 21:59:47</h5>
+<span class='badge badge-success'>03.18.2025 9:59:47 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:05 PM</span>
+<span class='badge badge-default'>00:01:18:071</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=36</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:05 PM</td>
+        <td>
+          Changed to next book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="37"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:01:06</p>
+            <p class="text-sm">
+              <span>10:01:06 PM</span> / <span>00:00:04:822</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:01:06</h5>
+<span class='badge badge-success'>03.18.2025 10:01:06 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:11 PM</span>
+<span class='badge badge-default'>00:00:04:822</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=37</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:11 PM</td>
+        <td>
+          Changed to next recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="38"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:01:11</p>
+            <p class="text-sm">
+              <span>10:01:11 PM</span> / <span>00:00:03:836</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:01:11</h5>
+<span class='badge badge-success'>03.18.2025 10:01:11 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:15 PM</span>
+<span class='badge badge-default'>00:00:03:836</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=38</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:15 PM</td>
+        <td>
+          Changed to next recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="39"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:01:17</p>
+            <p class="text-sm">
+              <span>10:01:17 PM</span> / <span>00:00:07:671</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:01:17</h5>
+<span class='badge badge-success'>03.18.2025 10:01:17 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:25 PM</span>
+<span class='badge badge-default'>00:00:07:671</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=39</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:25 PM</td>
+        <td>
+          Changed to next recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="40"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:01:26</p>
+            <p class="text-sm">
+              <span>10:01:26 PM</span> / <span>00:00:03:462</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:01:26</h5>
+<span class='badge badge-success'>03.18.2025 10:01:26 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:29 PM</span>
+<span class='badge badge-default'>00:00:03:462</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=40</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:29 PM</td>
+        <td>
+          Changed to previous recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="41"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:01:30</p>
+            <p class="text-sm">
+              <span>10:01:30 PM</span> / <span>00:00:04:202</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:01:30</h5>
+<span class='badge badge-success'>03.18.2025 10:01:30 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:34 PM</span>
+<span class='badge badge-default'>00:00:04:202</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=41</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:34 PM</td>
+        <td>
+          Changed to previous recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="42"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:01:35</p>
+            <p class="text-sm">
+              <span>10:01:35 PM</span> / <span>00:00:07:102</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:01:35</h5>
+<span class='badge badge-success'>03.18.2025 10:01:35 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:43 PM</span>
+<span class='badge badge-default'>00:00:07:102</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=42</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:43 PM</td>
+        <td>
+          Changed to previous recommended book!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="43"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:01:44</p>
+            <p class="text-sm">
+              <span>10:01:44 PM</span> / <span>00:00:07:399</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:01:44</h5>
+<span class='badge badge-success'>03.18.2025 10:01:44 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:51 PM</span>
+<span class='badge badge-default'>00:00:07:399</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=43</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:51 PM</td>
+        <td>
+          Change to book detail page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="44"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:01:51</p>
+            <p class="text-sm">
+              <span>10:01:51 PM</span> / <span>00:00:06:075</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:01:51</h5>
+<span class='badge badge-success'>03.18.2025 10:01:51 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:01:58 PM</span>
+<span class='badge badge-default'>00:00:06:075</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=44</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:01:58 PM</td>
+        <td>
+          Change to book detail page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="45"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:01:59</p>
+            <p class="text-sm">
+              <span>10:01:59 PM</span> / <span>00:00:10:662</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:01:59</h5>
+<span class='badge badge-success'>03.18.2025 10:01:59 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:10 PM</span>
+<span class='badge badge-default'>00:00:10:662</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=45</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:10 PM</td>
+        <td>
+          Change to book detail page successfully!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="46"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:02:12</p>
+            <p class="text-sm">
+              <span>10:02:12 PM</span> / <span>00:00:04:726</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:02:12</h5>
+<span class='badge badge-success'>03.18.2025 10:02:12 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:17 PM</span>
+<span class='badge badge-default'>00:00:04:726</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=46</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend Index Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:17 PM</td>
+        <td>
+          Recommend Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="47"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:02:17</p>
+            <p class="text-sm">
+              <span>10:02:17 PM</span> / <span>00:00:03:626</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:02:17</h5>
+<span class='badge badge-success'>03.18.2025 10:02:17 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:21 PM</span>
+<span class='badge badge-default'>00:00:03:626</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=47</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend Index Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:21 PM</td>
+        <td>
+          Recommend Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="48"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:02:22</p>
+            <p class="text-sm">
+              <span>10:02:22 PM</span> / <span>00:00:07:911</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:02:22</h5>
+<span class='badge badge-success'>03.18.2025 10:02:22 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:30 PM</span>
+<span class='badge badge-default'>00:00:07:911</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=48</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend field link displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend Next Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend Previous Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend Index Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend Book Detail Button displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:30 PM</td>
+        <td>
+          Recommend Read More Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="49"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:02:32</p>
+            <p class="text-sm">
+              <span>10:02:32 PM</span> / <span>00:00:00:000</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:02:32</h5>
+<span class='badge badge-success'>03.18.2025 10:02:32 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:32 PM</span>
+<span class='badge badge-default'>00:00:00:000</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=49</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div>          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="50"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:02:35</p>
+            <p class="text-sm">
+              <span>10:02:35 PM</span> / <span>00:00:00:000</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:02:35</h5>
+<span class='badge badge-success'>03.18.2025 10:02:35 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:35 PM</span>
+<span class='badge badge-default'>00:00:00:000</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=50</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div>          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="51"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:02:41</p>
+            <p class="text-sm">
+              <span>10:02:41 PM</span> / <span>00:00:00:000</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:02:41</h5>
+<span class='badge badge-success'>03.18.2025 10:02:41 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:41 PM</span>
+<span class='badge badge-default'>00:00:00:000</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=51</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div>          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="52"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:02:51</p>
+            <p class="text-sm">
+              <span>10:02:51 PM</span> / <span>00:00:03:978</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:02:51</h5>
+<span class='badge badge-success'>03.18.2025 10:02:51 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:02:55 PM</span>
+<span class='badge badge-default'>00:00:03:978</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=52</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:55 PM</td>
+        <td>
+          Discount field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:55 PM</td>
+        <td>
+          Discount Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:02:55 PM</td>
+        <td>
+          Discount Book Detail Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="53"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:02:55</p>
+            <p class="text-sm">
+              <span>10:02:55 PM</span> / <span>00:00:05:589</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:02:55</h5>
+<span class='badge badge-success'>03.18.2025 10:02:55 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:03:01 PM</span>
+<span class='badge badge-default'>00:00:05:589</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=53</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:00 PM</td>
+        <td>
+          Discount field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:00 PM</td>
+        <td>
+          Discount Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:01 PM</td>
+        <td>
+          Discount Book Detail Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="54"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:03:02</p>
+            <p class="text-sm">
+              <span>10:03:02 PM</span> / <span>00:00:08:046</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:03:02</h5>
+<span class='badge badge-success'>03.18.2025 10:03:02 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:03:10 PM</span>
+<span class='badge badge-default'>00:00:08:046</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=54</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:10 PM</td>
+        <td>
+          Discount field displayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:10 PM</td>
+        <td>
+          Discount Index Buttondisplayed!
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:10 PM</td>
+        <td>
+          Discount Book Detail Button displayed!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="55"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[1] browser=chrome - 2025-03-18 22:03:12</p>
+            <p class="text-sm">
+              <span>10:03:12 PM</span> / <span>00:00:03:196</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[1] browser=chrome - 2025-03-18 22:03:12</h5>
+<span class='badge badge-success'>03.18.2025 10:03:12 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:03:15 PM</span>
+<span class='badge badge-default'>00:00:03:196</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=55</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:15 PM</td>
+        <td>
+          Changed to next discount!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="56"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[2] browser=edge - 2025-03-18 22:03:15</p>
+            <p class="text-sm">
+              <span>10:03:15 PM</span> / <span>00:00:03:667</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[2] browser=edge - 2025-03-18 22:03:15</h5>
+<span class='badge badge-success'>03.18.2025 10:03:15 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:03:19 PM</span>
+<span class='badge badge-default'>00:00:03:667</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=56</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:19 PM</td>
+        <td>
+          Changed to next discount!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="57"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">[3] browser=firefox - 2025-03-18 22:03:20</p>
+            <p class="text-sm">
+              <span>10:03:20 PM</span> / <span>00:00:08:248</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">[3] browser=firefox - 2025-03-18 22:03:20</h5>
+<span class='badge badge-success'>03.18.2025 10:03:20 PM</span>
+<span class='badge badge-danger'>03.18.2025 10:03:29 PM</span>
+<span class='badge badge-default'>00:00:08:248</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=57</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:03:29 PM</td>
+        <td>
+          Changed to next discount!
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Mar 18, 2025 09:48:59 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Mar 18, 2025 10:03:30 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>51</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>6</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='89%'>
+<b>51</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='10%'><b>6</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='94%'><b>99</b> events passed</small></div>
+<div>
+<small data-tooltip='5%'><b>6</b> events failed,
+<b data-tooltip='%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"[1] browser=chrome - 2025-03-18 21:48:59":5.612,"[2] browser=edge - 2025-03-18 21:49:05":4.685,"[3] browser=firefox - 2025-03-18 21:49:11":8.957,"[1] browser=chrome - 2025-03-18 21:49:21":5.025,"[2] browser=edge - 2025-03-18 21:49:27":3.854,"[3] browser=firefox - 2025-03-18 21:49:32":71.6,"[1] browser=chrome - 2025-03-18 21:50:45":8.084,"[2] browser=edge - 2025-03-18 21:50:55":6.75,"[3] browser=firefox - 2025-03-18 21:51:03":13.49,"[1] browser=chrome - 2025-03-18 21:51:18":6.978,"[2] browser=edge - 2025-03-18 21:51:25":4.373,"[3] browser=firefox - 2025-03-18 21:51:31":9.067,"[1] browser=chrome - 2025-03-18 21:51:42":4.379,"[2] browser=edge - 2025-03-18 21:51:46":6.003,"[3] browser=firefox - 2025-03-18 21:51:54":8.562,"[1] browser=chrome - 2025-03-18 21:52:04":7.875,"[2] browser=edge - 2025-03-18 21:52:12":6.935,"[3] browser=firefox - 2025-03-18 21:52:21":12.978,"[1] browser=chrome - 2025-03-18 21:52:35":5.543,"[2] browser=edge - 2025-03-18 21:52:41":3.939,"[3] browser=firefox - 2025-03-18 21:52:46":70.541,"[1] browser=chrome - 2025-03-18 21:53:58":5.453,"[2] browser=edge - 2025-03-18 21:54:04":3.222,"[3] browser=firefox - 2025-03-18 21:54:09":69.474,"[1] browser=chrome - 2025-03-18 21:55:19":5.746,"[2] browser=edge - 2025-03-18 21:55:25":3.373,"[3] browser=firefox - 2025-03-18 21:55:30":69.339,"[1] browser=chrome - 2025-03-18 21:56:41":4.393,"[2] browser=edge - 2025-03-18 21:56:45":2.932,"[3] browser=firefox - 2025-03-18 21:56:50":69.432,"[1] browser=chrome - 2025-03-18 21:58:01":4.916,"[2] browser=edge - 2025-03-18 21:58:06":3.934,"[3] browser=firefox - 2025-03-18 21:58:12":69.261,"[1] browser=chrome - 2025-03-18 21:59:22":11.652,"[2] browser=edge - 2025-03-18 21:59:34":10.848,"[3] browser=firefox - 2025-03-18 21:59:47":78.071,"[1] browser=chrome - 2025-03-18 22:01:06":4.822,"[2] browser=edge - 2025-03-18 22:01:11":3.836,"[3] browser=firefox - 2025-03-18 22:01:17":7.671,"[1] browser=chrome - 2025-03-18 22:01:26":3.462,"[2] browser=edge - 2025-03-18 22:01:30":4.202,"[3] browser=firefox - 2025-03-18 22:01:35":7.102,"[1] browser=chrome - 2025-03-18 22:01:44":7.399,"[2] browser=edge - 2025-03-18 22:01:51":6.075,"[3] browser=firefox - 2025-03-18 22:01:59":10.662,"[1] browser=chrome - 2025-03-18 22:02:12":4.726,"[2] browser=edge - 2025-03-18 22:02:17":3.626,"[3] browser=firefox - 2025-03-18 22:02:22":7.911,"[1] browser=chrome - 2025-03-18 22:02:32":0,"[2] browser=edge - 2025-03-18 22:02:35":0,"[3] browser=firefox - 2025-03-18 22:02:41":0,"[1] browser=chrome - 2025-03-18 22:02:51":3.978,"[2] browser=edge - 2025-03-18 22:02:55":5.589,"[3] browser=firefox - 2025-03-18 22:03:02":8.046,"[1] browser=chrome - 2025-03-18 22:03:12":3.196,"[2] browser=edge - 2025-03-18 22:03:15":3.667,"[3] browser=firefox - 2025-03-18 22:03:20":8.248
+};
+</script>
+<div class="row">
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 51,
+failParent: 6,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 99,
+failEvents: 6,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 0
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>
