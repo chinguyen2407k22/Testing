@@ -1,4 +1,4 @@
-package org.example.test.test_project.UI_UX_testing;
+package org.example.test.test_project.UI_UX_testing.Sprint2;
 
 
 import com.aventstack.extentreports.ExtentReports;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

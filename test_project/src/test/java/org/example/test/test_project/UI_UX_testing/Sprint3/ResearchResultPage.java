@@ -1,4 +1,4 @@
-package org.example.test.test_project.UI_UX_testing;
+package org.example.test.test_project.UI_UX_testing.Sprint3;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -7,12 +7,8 @@ import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.awt.image.Kernel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

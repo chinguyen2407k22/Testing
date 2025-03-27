@@ -1,4 +1,4 @@
-package org.example.test.test_project.UI_UX_testing;
+package org.example.test.test_project.UI_UX_testing.Sprint3;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;

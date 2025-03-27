@@ -1,4 +1,4 @@
-package org.example.test.test_project.UI_UX_testing;
+package org.example.test.test_project.UI_UX_testing.Sprint2;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -12,13 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginPage {
     private WebDriver driver;
