@@ -488,9 +488,9 @@ public class HomePage {
         try{
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
-            //WebElement sucbribeEmailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div"));
-            //Assertions.assertTrue(sucbribeEmailBox.isDisplayed(),"Subcribe Email Box did not display");
-            //sucbribeEmailBox.sendKeys("example@gmail.com");
+            WebElement sucbribeEmailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div"));
+            Assertions.assertTrue(sucbribeEmailBox.isDisplayed(),"Subcribe Email Box did not display");
+            sucbribeEmailBox.sendKeys("example@gmail.com");
 
             WebElement sucbribeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/button"));
             Assertions.assertTrue(sucbribeButton.isDisplayed(),"Subcribe Button did not display");

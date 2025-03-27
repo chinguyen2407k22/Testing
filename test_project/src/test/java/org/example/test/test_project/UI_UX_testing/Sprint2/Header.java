@@ -62,11 +62,11 @@ public class Header {
 
             WebElement home = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[1]"));
             Assertions.assertTrue(home.isDisplayed(),"Home link did not display");
-            test.pass("Home link icon displayed!");
+            test.pass("Home link displayed!");
 
             WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
             Assertions.assertTrue(product.isDisplayed(),"Product link did not display");
-            test.pass("Product link icon displayed!");
+            test.pass("Product link displayed!");
 
 
         }catch (Exception e) {

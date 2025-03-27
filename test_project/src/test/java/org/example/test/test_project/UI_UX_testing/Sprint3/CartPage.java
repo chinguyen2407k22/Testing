@@ -20,6 +20,7 @@ public class CartPage {
     private WebDriver driver;
     private static ExtentReports extent;
     private ExtentTest test;
+
     @BeforeAll
     public static void setupReport() {
         extent = ExtendReport.getInstance();

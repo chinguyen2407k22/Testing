@@ -511,7 +511,7 @@ public class LoginPage {
         try {
 
             WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("example123@gmail.com");
+            usernameField.sendKeys("example1@gmail.com");
             WebElement passwordField = driver.findElement(By.name("password"));
             passwordField.sendKeys("password1");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
