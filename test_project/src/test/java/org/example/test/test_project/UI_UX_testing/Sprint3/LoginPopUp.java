@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -33,6 +34,7 @@ public class LoginPopUp {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
+
 
 
     @ParameterizedTest
@@ -476,6 +478,117 @@ public class LoginPopUp {
 
             if (currentUrl.equals(expectedUrl)) {
                 test.pass("Page changed to WISHLIST page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+
+        }catch (Exception e){
+            test.fail(e.getMessage());
+        }
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkAddToCartwithoutlogin(String browser) {
+        try {
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/");
+            test.info("Check add a book to CART without login!");
+
+            WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
+            Assertions.assertTrue(continueBrowsing.isDisplayed());
+            test.pass("Continue Browsing displayed!");
+
+            continueBrowsing.click();
+            test.pass("Clicking Continue Browsing Button successfully!");
+
+            WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
+            Assertions.assertTrue(product.isDisplayed(),"Product link did not display");
+            test.pass("Product link displayed!");
+
+            product.click();
+            test.pass("Clicking Product Link successfully!");
+
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/product";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to product page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+            Thread.sleep(1000);
+            WebElement hoverElement = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div"));
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(hoverElement).perform();
+
+            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div/div[1]/button"));
+            test.pass("Add to cart button displayed!");
+
+            icon2.click();
+            test.pass("Clicking ADD TO CART BUTTON successfully!");
+
+            currentUrl = driver.getCurrentUrl();
+            expectedUrl = "http://localhost:3000/login";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to login page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+
+        }catch (Exception e){
+            test.fail(e.getMessage());
+        }
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkAddToWishListwithoutlogin(String browser) {
+        try {
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/");
+            test.info("Check add a book to WISHLIST without login!");
+
+            WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
+            Assertions.assertTrue(continueBrowsing.isDisplayed());
+            test.pass("Continue Browsing displayed!");
+
+            continueBrowsing.click();
+            test.pass("Clicking Continue Browsing Button successfully!");
+
+            WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
+            Assertions.assertTrue(product.isDisplayed(),"Product link did not display");
+            test.pass("Product link displayed!");
+
+            product.click();
+            test.pass("Clicking Product Link successfully!");
+
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/product";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to product page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+            Thread.sleep(1000);
+            WebElement hoverElement = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div"));
+
+            hoverElement.click();
+            test.pass("Clicking to see book detail successfully!");
+            Thread.sleep(1000);
+
+            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div/div"));
+            test.pass("Add to wishlist button displayed!");
+
+            icon2.click();
+            test.pass("Clicking ADD TO WISHLIST BUTTON successfully!");
+
+            currentUrl = driver.getCurrentUrl();
+            expectedUrl = "http://localhost:3000/login";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to login page successfully!");
             } else {
                 test.fail("Page unchanged!");
             }

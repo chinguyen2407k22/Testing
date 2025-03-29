@@ -10,7 +10,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,57 +34,121 @@ public class CartPage {
     public void setup(TestInfo testInfo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
-    }
 
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
-
-    @AfterAll
-    public static void closeTest(){
-        ExtendReport.closeReport();
-    }
-
-    @ValueSource(strings = {"chrome"})
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkCheckOutButton(String browser){
         try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check Check Out button");
+            driver = BrowserFactory.getDriver("firefox");
+            driver.get("http://localhost:3000/");
+            Thread.sleep(1000);
 
-            WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[7]/button"));
-            Assertions.assertTrue(checkOutButton.isDisplayed(),"Check Out Button did not display");
-            test.pass("Check Out Button displayed!");
+            WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
+            Assertions.assertTrue(loginButton.isDisplayed());
 
-            checkOutButton.click();
-            test.pass("Click check out button successfully!");
+            loginButton.click();
 
             String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/confirmaddress";
+            String expectedUrl = "http://localhost:3000/login";
 
             if (currentUrl.equals(expectedUrl)) {
-                test.pass("Page changed successfully!");
+                test.pass("Change to login page successfully!");
             } else {
                 test.fail("Page unchanged!");
             }
+            Thread.sleep(1000);
 
+            WebElement usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("username1");
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys("password1");
+            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+
+            signInButton.click();
+            test.pass("Log in successfully!");
+
+            Thread.sleep(1000);
+
+            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div[2]"));
+            Assertions.assertTrue(icon2.isDisplayed(),"Shopping cart icon did not display");
+
+            icon2.click();
+            Thread.sleep(1000);
+
+            currentUrl = driver.getCurrentUrl();
+            expectedUrl = "http://localhost:3000/cart";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to cart page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
         }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
+
+
+    @Test
+    public void checkMinusButtonPrice() {
+        try {
+            double epsilon = 1e-9;
+            test.info("Check Minus Button with product total price");
+
+            WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
+            Assertions.assertTrue(addButton.isDisplayed(), "Add Button did not display");
+            addButton.click();
+            addButton.click();
+
+            WebElement minusButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[1]"));
+            Assertions.assertTrue(minusButton.isDisplayed(), "Minus Button did not display");
+            test.pass("Minus Button  displayed!");
+
+            WebElement productPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
+            Assertions.assertTrue(productPrice.isDisplayed(), "Product Price did not display");
+            String ppriceText = productPrice.getText().replace("$", "");
+            double pprice = Double.parseDouble(ppriceText);
+
+            WebElement productTotalPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[5]"));
+            Assertions.assertTrue(productTotalPrice.isDisplayed(), "Product Total Price did not display");
+            test.pass("Product Total Price displayed!");
+            String priceText = productTotalPrice.getText().replace("$", "");
+            double old_price = Double.parseDouble(priceText);
+
+            minusButton.click();
+            test.pass("Click minus button successfylly!");
+            Thread.sleep(1000);
+
+            priceText = productTotalPrice.getText().replace("$", "");
+            double new_price = Double.parseDouble(priceText);
+            if (new_price - (old_price - pprice) < epsilon) {
+                test.pass("product total price was updated!");
+            } else test.fail("product total price wasn't updated!");
+
+        } catch (Exception e) {
             test.fail(e.getMessage());
         }
     }
-    /*
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkComponent(String browser){
+    @Test
+    public void checkOKButton() {
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check Cart Page components");
+            double epsilon = 1e-9;
+            test.info("Check click add voucher button");
+            Thread.sleep(1000);
 
+            WebElement addVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div/div[1]/div/button"));
+            Assertions.assertTrue(addVoucherButton.isDisplayed(), "Add Voucher Button did not display");
+            test.pass("Add Voucher Button displayed!");
+
+            addVoucherButton.click();
+            test.pass("Click add voucher button successfully!");
+
+        } catch (Exception e) {
+            test.fail(e.getMessage());
+        }
+    }
+    @Test
+    public void checkComponent(){
+        try {
+            test.info("Check Cart Page component");
             WebElement cartHeader = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]"));
             Assertions.assertTrue(cartHeader.isDisplayed(),"Cart Header did not display");
             test.pass("Cart Header displayed!");
@@ -96,10 +164,6 @@ public class CartPage {
             WebElement productTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/p[1]"));
             Assertions.assertTrue(productTitle.isDisplayed(),"Product Title did not display");
             test.pass("Product Title displayed!");
-
-            WebElement productAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/p[2]"));
-            Assertions.assertTrue(productAuthor.isDisplayed(),"Product Author did not display");
-            test.pass("Product Author displayed!");
 
             WebElement productPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
             Assertions.assertTrue(productPrice.isDisplayed(),"Product Price did not display");
@@ -144,76 +208,48 @@ public class CartPage {
             WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[7]/button"));
             Assertions.assertTrue(checkOutButton.isDisplayed(),"Check Out Button did not display");
             test.pass("Check Out Button displayed!");
+
+            WebElement productAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/p[2]"));
+            Assertions.assertTrue(productAuthor.isDisplayed(),"Product Author did not display");
+            test.pass("Product Author displayed!");
+
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
-    @ValueSource(strings = {"chrome"})
-    @ParameterizedTest
-    //@ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkRemoveABook(String browser){
+
+    @Test
+    public void checkCheckOutButton(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check remove a book");
+            test.info("Check Check Out button");
+            Thread.sleep(1000);
+            WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[7]/button"));
+            Assertions.assertTrue(checkOutButton.isDisplayed(),"Check Out Button did not display");
+            test.pass("Check Out Button displayed!");
 
-            WebElement removeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/button"));
-            Assertions.assertTrue(removeButton.isDisplayed(),"Remove Button did not display");
-            test.pass("Remove Button displayed!");
+            checkOutButton.click();
+            test.pass("Click check out button successfully!");
 
-            WebElement productTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/p[1]"));
-            Assertions.assertTrue(productTitle.isDisplayed(), "Product Title did not display");
-            test.pass("Product Title displayed!");
 
-            removeButton.click();
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/confirmaddress";
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            boolean isProductRemoved = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/p[1]")));
-
-            if (isProductRemoved) {
-                test.pass("A book was removed from the cart successfully!");
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to confirm address page successfully!");
             } else {
-                test.fail("Removed a book unsuccessfully!");
+                test.fail("Page unchanged!");
             }
-            Thread.sleep(5000);
-            File testImage = new File("./src/test/java/org/example/test/test_project/Image/TTHVTCX.jpg"); // Đảm bảo file ảnh tồn tại
-            String bookJson = "{"
-                    + "\"name\":\"Bố Già\","
-                    + "\"rating\":4.9,"
-                    + "\"author\":\"Mario Puzo\","
-                    + "\"publisher\":\"NXB Văn Học\","
-                    + "\"publishingCompany\":\"Nhà Nam\","
-                    + "\"publishingYear\":2019,"
-                    + "\"weight\":600,"
-                    + "\"dimensions\":\"16x24 cm\","
-                    + "\"pages\":700,"
-                    + "\"coverType\":\"Bia_cung\","
-                    + "\"translator\":\"Lê Đình Chi\","
-                    + "\"summary\":\"Tác phẩm kinh điển về thế giới mafia và những cuộc đấu tranh quyền lực.\","
-                    + "\"price\":220000.0,"
-                    + "\"comments\":\"Một tuyệt phẩm về tội phạm và quyền lực.\""
-                    + "}";
-
-            given()
-                    .multiPart("book", bookJson, "application/json")
-                    .multiPart("image", testImage)
-                    .contentType(ContentType.MULTIPART)
-                    .when()
-                    .post("http://localhost:8080/api/books")
-                    .then()
-                    .statusCode(200);
-            test.pass("Add a book successfully!");
 
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkPlusProductTotalPrice(String browser){
+
+
+    @Test
+    public void checkPlusProductTotalPrice(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
+            double epsilon = 1e-9;
             test.info("Check Plus Button with product total price");
 
             WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
@@ -233,6 +269,7 @@ public class CartPage {
 
             addButton.click();
             test.pass("Click add button successfylly!");
+            Thread.sleep(1000);
 
             priceText = productTotalPrice.getText().replace("$", "");
             double new_price = Double.parseDouble(priceText);
@@ -244,12 +281,10 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkPlusSubTotalPrice(String browser){
+    @Test
+    public void checkPlusSubTotalPrice(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
+            double epsilon = 1e-9;
             test.info("Check Plus Button with sub total price");
 
             WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
@@ -269,6 +304,7 @@ public class CartPage {
 
             addButton.click();
             test.pass("Click add button successfylly!");
+            Thread.sleep(1000);
 
             priceText = subTotal.getText().replace("$", "");
             double new_price = Double.parseDouble(priceText);
@@ -280,12 +316,9 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkPlusTotalPrice(String browser){
+    @Test
+    public void checkPlusTotalPrice(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
             test.info("Check Plus Button with total price");
             double epsilon = 1e-9;
 
@@ -297,6 +330,7 @@ public class CartPage {
             Assertions.assertTrue(productPrice.isDisplayed(),"Product Price did not display");
             String ppriceText = productPrice.getText().replace("$", "");
             double pprice = Double.parseDouble(ppriceText);
+            Thread.sleep(1000);
 
             WebElement totalPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div/div[2]/div/span[2]"));
             Assertions.assertTrue(totalPrice.isDisplayed(),"Total Price did not display");
@@ -317,12 +351,9 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkPlusButton(String browser){
+    @Test
+    public void checkPlusButton(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
             test.info("Check Plus Button");
 
             WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
@@ -335,9 +366,9 @@ public class CartPage {
             String numBook = num.getAttribute("value");
             int old_number = Integer.parseInt(numBook);
 
-
             addButton.click();
             test.pass("Click add button successfully!");
+            Thread.sleep(1000);
             numBook=num.getAttribute("value");
             int new_number = Integer.parseInt(numBook);
             if(new_number == old_number + 1){
@@ -351,12 +382,9 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkMinusButtonFrom1(String browser){
+    @Test
+    public void checkMinusButtonFrom(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
             test.info("Check Minus Button with num of book is 1");
 
             WebElement minusButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[1]"));
@@ -385,12 +413,9 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkMinusButton(String browser){
+    @Test
+    public void checkMinusButton(){
         try {
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
             test.info("Check Minus Button with num of book is greater than 1");
             WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
             Assertions.assertTrue(addButton.isDisplayed(),"Add Button did not display");
@@ -411,6 +436,7 @@ public class CartPage {
 
             minusButton.click();
             test.pass("Click minus button successfully!");
+            Thread.sleep(1000);
             numBook=num.getAttribute("value");
             int new_number = Integer.parseInt(numBook);
             if(new_number == old_number -1){
@@ -424,59 +450,9 @@ public class CartPage {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkMinusButtonPrice(String browser){
+    @Test
+    public void checkEnterBox(){
         try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check Minus Button with product total price");
-
-            WebElement addButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[2]"));
-            Assertions.assertTrue(addButton.isDisplayed(),"Add Button did not display");
-            addButton.click();
-            addButton.click();
-
-            WebElement minusButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/div/button[1]"));
-            Assertions.assertTrue(minusButton.isDisplayed(),"Minus Button did not display");
-            test.pass("Minus Button  displayed!");
-
-            WebElement productPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
-            Assertions.assertTrue(productPrice.isDisplayed(),"Product Price did not display");
-            String ppriceText = productPrice.getText().replace("$", "");
-            double pprice = Double.parseDouble(ppriceText);
-
-            WebElement productTotalPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[5]"));
-            Assertions.assertTrue(productTotalPrice.isDisplayed(),"Product Total Price did not display");
-            test.pass("Product Total Price displayed!");
-            String priceText = productTotalPrice.getText().replace("$", "");
-            double old_price = Double.parseDouble(priceText);
-
-            minusButton.click();
-            test.pass("Click minus button successfylly!");
-
-            priceText = productTotalPrice.getText().replace("$", "");
-            double new_price = Double.parseDouble(priceText);
-            System.out.println(new_price);
-            System.out.println(old_price);
-            System.out.println(new_price-old_price);
-            System.out.println(pprice);
-            if (new_price - (old_price - pprice)<epsilon){
-                test.pass("product total price was updated!");
-            }else test.fail("product total price wasn't updated!");
-
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkEnterBox(String browser){
-        try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
             test.info("Check Enter add voucher box");
 
             WebElement addCodeBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div/div[1]/div/input"));
@@ -495,13 +471,10 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkEnterBox100times(String browser){
+    @Test
+    public void checkEnterBox100times(){
         try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
+
             test.info("Check Enter add voucher box 100 times");
 
             WebElement addCodeBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div/div[1]/div/input"));
@@ -517,58 +490,85 @@ public class CartPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkOKButton(String browser){
+
+
+
+    /*
+    @Test
+    public void checkAddANewBook(){
         try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check click add voucher button");
+            driver.get("http://localhost:3000/product");
+            Thread.sleep(1000);
+            WebElement hoverElement = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div"));
 
-            WebElement addVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div/div[1]/div/button"));
-            Assertions.assertTrue(addVoucherButton.isDisplayed(),"Add Voucher Button did not display");
-            test.pass("Add Voucher Button displayed!");
+            Actions actions = new Actions(driver);
+            actions.moveToElement(hoverElement).perform();
 
-            addVoucherButton.click();
-            test.pass("Click add voucher button successfully!");
+            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div/div[1]/button"));
+            test.pass("Add to cart button displayed!");
 
+            icon2.click();
+            test.pass("Clicking ADD TO CART BUTTON successfully!");
+
+            WebElement addsuccessfullNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/section"));
+            if (addsuccessfullNofi.getText().equals("Added to cart successfully!")){
+                test.pass("Add a book successfully");
+            }else {
+                test.fail("Add a book unsuccessfully");
+            }
+            icon2.click();
+            test.pass("Clicking ADD TO CART BUTTON successfully!");
+
+            addsuccessfullNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/section"));
+            if (addsuccessfullNofi.getText().equals("Added to cart successfully!")){
+                test.pass("Add a book successfully");
+            }else {
+                test.fail("Add a book unsuccessfully");
+            }
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkCheckOutButton(String browser){
+    @Test
+    public void checkRemoveABook(){
         try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/cart");
-            test.info("Check Check Out button");
+            test.info("Check Remove a the last book");
 
-            WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[7]/button"));
-            Assertions.assertTrue(checkOutButton.isDisplayed(),"Check Out Button did not display");
-            test.pass("Check Out Button displayed!");
+            WebElement removeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[4]/button"));
+            Assertions.assertTrue(removeButton.isDisplayed(),"Remove Button did not display");
+            test.pass("Remove Button displayed!");
 
-            checkOutButton.click();
-            test.pass("Click check out button successfully!");
+            WebElement cartRow = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]"));
+            Assertions.assertTrue(cartRow.isDisplayed(), "Cart Row did not display");
+            test.pass("Cart Row displayed!");
 
-            String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/confirmaddress";
+            removeButton.click();
 
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Page changed successfully!");
-            } else {
-                test.fail("Page unchanged!");
+            WebElement cartRowNull = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]"));
+            Assertions.assertTrue(cartRowNull.isDisplayed(), "Cart Row did not display");
+
+            if(cartRowNull.getText().equals("There are no products here.")){
+                test.pass("Delete the last book: "+cartRowNull.getText());
+            }else {
+                test.pass("Delete the last book: none!");
             }
 
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
-
-
      */
+
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
+
+    @AfterAll
+    public static void closeTest(){
+        ExtendReport.closeReport();
+    }
+
 
 }

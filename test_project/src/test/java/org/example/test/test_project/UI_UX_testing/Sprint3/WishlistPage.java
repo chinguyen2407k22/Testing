@@ -32,15 +32,60 @@ public class WishlistPage {
     public void setup(TestInfo testInfo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
-    }
-    @ValueSource(strings = {"firefox"})
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkWishListComponent(String browser){
-        try {
 
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/wishlist");
+        try {
+            driver = BrowserFactory.getDriver("chrome");
+            driver.get("http://localhost:3000/");
+            test.info("Check Check Out button");
+
+            WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
+            Assertions.assertTrue(loginButton.isDisplayed());
+
+            loginButton.click();
+
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/login";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Change to login page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+            Thread.sleep(1000);
+
+            WebElement usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("username1");
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys("password1");
+            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+
+            signInButton.click();
+            test.pass("Log in successfully!");
+
+            Thread.sleep(1000);
+
+            WebElement icon3 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div[3]"));
+            Assertions.assertTrue(icon3.isDisplayed(),"WISHLIST icon did not display");
+
+            icon3.click();
+            test.pass("Clicking WISHLIST BUTTON successfully!");
+
+            currentUrl = driver.getCurrentUrl();
+            expectedUrl = "http://localhost:3000/wishlist";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to WISHLIST page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+        }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
+    @Test
+    public void checkWishListComponent(){
+        try {
             test.info("Check Book in Wish List");
 
             WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div"));
@@ -59,7 +104,6 @@ public class WishlistPage {
             Assertions.assertTrue(bookAuthor.isDisplayed(),"Book Author did not displayed!");
             test.pass("Book Author displayed!");
 
-
             WebElement bookPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/p[2]"));
             Assertions.assertTrue(bookPrice.isDisplayed(),"Book Price did not displayed!");
             test.pass("Book Price displayed!");
@@ -71,7 +115,6 @@ public class WishlistPage {
             WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[1]/div[1]/select"));
             Assertions.assertTrue(sortByButton.isDisplayed(),"Sort By Button did not displayed!");
             test.pass("Sort By Button displayed!");
-
 
         }catch (Exception e){
             test.fail(e.getMessage());
