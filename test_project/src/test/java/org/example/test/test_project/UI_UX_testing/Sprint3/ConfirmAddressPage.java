@@ -7,9 +7,11 @@ import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.ValueSources;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -32,10 +34,13 @@ public class ConfirmAddressPage {
     public void setup(TestInfo testInfo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
+    }
 
+    public void login(String browser){
         try {
-            driver = BrowserFactory.getDriver("edge");
+            driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(3000);
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(loginButton.isDisplayed());
@@ -55,7 +60,7 @@ public class ConfirmAddressPage {
             WebElement usernameField = driver.findElement(By.name("username"));
             usernameField.sendKeys("username2");
             WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password2");
+            passwordField.sendKeys("abcxyz123");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
@@ -77,7 +82,7 @@ public class ConfirmAddressPage {
             } else {
                 test.fail("Page unchanged!");
             }
-            WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[7]/button"));
+            WebElement checkOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/button"));
             Assertions.assertTrue(checkOutButton.isDisplayed(),"Check Out Button did not display");
             test.pass("Check Out Button displayed!");
 
@@ -98,36 +103,11 @@ public class ConfirmAddressPage {
         }
     }
 
-
-    @Test
-    public void checkVNPayButton() {
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkConfirmAddressComponent(String browser){
         try {
-            test.info("Check click VNPay Button!");
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-            List<WebElement> paymentButtons = driver.findElements(By.className("payment-button"));
-
-            WebElement cashButton = paymentButtons.get(0);
-            test.pass("VNPay Button displayed");
-            cashButton.click();
-
-            wait.until(ExpectedConditions.attributeContains(cashButton, "class", "active"));
-
-            boolean isTickVisible = cashButton.findElement(By.className("checkmark")).isDisplayed();
-
-            if (isTickVisible) {
-                test.pass("VNPay payment method selected successfully!");
-            } else {
-                test.fail("Error: Checkmark not found!");
-            }
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @Test
-    public void checkConfirmAddressComponent(){
-        try {
+            login(browser);
             test.info("Check confirm address page components!");
 
             WebElement header = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/h2"));
@@ -152,11 +132,11 @@ public class ConfirmAddressPage {
             Assertions.assertTrue(phoneNumberBox.isDisplayed(),"Phone Number Box did not displayed!");
             test.pass("Phone Number Box displayed!");
 
-            WebElement cashButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/button[2]"));
+            WebElement cashButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/button[2]"));
             Assertions.assertTrue(cashButton.isDisplayed(),"Pay By Cash Button did not displayed!");
             test.pass("Pay By Cash Button displayed!");
 
-            WebElement vnpayButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/button[1]"));
+            WebElement vnpayButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/button[1]"));
             Assertions.assertTrue(vnpayButton.isDisplayed(),"Pay by VNPAY Button did not displayed!");
             test.pass("Pay by VNPAY Button displayed!");
 
@@ -168,11 +148,57 @@ public class ConfirmAddressPage {
             test.fail(e.getMessage());
         }
     }
-
-
-    @Test
-    public void checkEnterInput(){
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkVNPayAndCashButton(String browser) {
         try {
+            login(browser);
+            test.info("Check click VNPay Button!");
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+            List<WebElement> paymentButtons = driver.findElements(By.className("payment-button"));
+
+            WebElement cashButton = paymentButtons.get(1);
+            test.pass("Cash Button displayed");
+            cashButton.click();
+
+            wait.until(ExpectedConditions.attributeContains(cashButton, "class", "active"));
+
+            boolean isTickVisible = cashButton.findElement(By.className("checkmark")).isDisplayed();
+
+            if (isTickVisible) {
+                test.pass("Cash payment method selected successfully!");
+            } else {
+                test.fail("Error: Checkmark not found!");
+            }
+
+            cashButton = paymentButtons.get(0);
+            test.pass("VNPay Button displayed");
+            cashButton.click();
+
+            wait.until(ExpectedConditions.attributeContains(cashButton, "class", "active"));
+
+            isTickVisible = cashButton.findElement(By.className("checkmark")).isDisplayed();
+
+            if (isTickVisible) {
+                test.pass("VNPay payment method selected successfully!");
+            } else {
+                test.fail("Error: Checkmark not found!");
+            }
+
+            
+        }catch (Exception e){
+            test.fail(e.getMessage());
+        }
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkEnterInput(String browser){
+        try {
+            login(browser);
             test.info("Check Enter into username, address, phone number box!");
 
             WebElement usernameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/input"));
@@ -210,29 +236,6 @@ public class ConfirmAddressPage {
                 test.fail("Enter phone number unsuccessfully!");
             }
 
-
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @Test
-    public void checkEnterInput100times(){
-        try {
-            test.info("Check Enter into username, address, phone number box 100 times!");
-
-
-            WebElement usernameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/input"));
-            Assertions.assertTrue(usernameBox.isDisplayed(),"Username Box did not display");
-            test.pass("Book Title Book displayed!");
-
-            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/input"));
-            Assertions.assertTrue(addressBox.isDisplayed(),"Address Box did not displayed!");
-            test.pass("Address Box displayed!");
-
-            WebElement phoneNumberBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/input"));
-            Assertions.assertTrue(phoneNumberBox.isDisplayed(),"Phone Number Box did not displayed!");
-            test.pass("Phone Number Box displayed!");
-
             for(int i=0; i<100;i++){
                 usernameBox.sendKeys("username1");
                 addressBox.sendKeys("address1");
@@ -248,32 +251,48 @@ public class ConfirmAddressPage {
             test.fail(e.getMessage());
         }
     }
+    
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkContinueButton(String browser){
+        try{
+            login(browser);
+            test.info("Click continue button.");
+            WebElement usernameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/input"));
+            Assertions.assertTrue(usernameBox.isDisplayed(),"Username Box did not display");
+            usernameBox.sendKeys("username2");
+        
+            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/input"));
+            Assertions.assertTrue(addressBox.isDisplayed(),"Address Box did not displayed!");
+            addressBox.sendKeys("address1");
+            
+            WebElement phoneNumberBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/input"));
+            Assertions.assertTrue(phoneNumberBox.isDisplayed(),"Phone Number Box did not displayed!");
+            phoneNumberBox.sendKeys("0123456789");
 
-    @Test
-    public void checkCashButton() {
-        try {
-            test.info("Check click Cash Button!");
+            WebElement continueButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/button"));
+            Assertions.assertTrue(continueButton.isDisplayed(),"Continue Button did not displayed!");
+            test.pass("Continue Button displayed!");
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            continueButton.click();
+            Thread.sleep(1000);
 
-            List<WebElement> paymentButtons = driver.findElements(By.className("payment-button"));
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/order";
+            System.out.println(currentUrl);
 
-            WebElement cashButton = paymentButtons.get(1);
-            test.pass("Cash Button displayed");
-            cashButton.click();
-
-            wait.until(ExpectedConditions.attributeContains(cashButton, "class", "active"));
-
-            boolean isTickVisible = cashButton.findElement(By.className("checkmark")).isDisplayed();
-
-            if (isTickVisible) {
-                test.pass("Cash payment method selected successfully!");
+            if (currentUrl.contains(expectedUrl)) {
+                test.pass("Changed to order detail page successfully!");
             } else {
-                test.fail("Error: Checkmark not found!");
+                test.fail("Fail");
             }
+
+            Thread.sleep(5000);
+
         }catch (Exception e){
             test.fail(e.getMessage());
         }
+
     }
     @AfterEach
     public void tearDown() {

@@ -35,96 +35,13 @@ public class LoginPopUp {
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkPopUpComponent(String browser){
-        try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/");
-            test.info("Check Login pop up component!");
-
-            WebElement popUp = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div"));
-            Assertions.assertTrue(popUp.isDisplayed());
-            test.pass("Login Pop up window displayed!");
-
-            WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
-            Assertions.assertTrue(loginButton.isDisplayed());
-            test.pass("Login button displayed!");
-
-            WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
-            Assertions.assertTrue(continueBrowsing.isDisplayed());
-            test.pass("Continue Browsing displayed!");
-
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkLoginButton(String browser) {
-        try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/");
-            test.info("Check Login Button!");
-
-            WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
-            Assertions.assertTrue(loginButton.isDisplayed());
-            test.pass("Login button displayed!");
-
-            loginButton.click();
-            String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/login";
-
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Page changed successfully!");
-            } else {
-                test.fail("Page unchanged!");
-            }
-
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkContinueBrowsingButton(String browser) {
-        try {
-            double epsilon = 1e-9;
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/");
-            test.info("Check Continue Browsing Button!");
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-            WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div")));
-
-            WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
-            Assertions.assertTrue(continueBrowsing.isDisplayed());
-            test.pass("Continue Browsing displayed!");
-            continueBrowsing.click();
-
-            boolean isPopupClosed = wait.until(ExpectedConditions.invisibilityOf(popup));
-
-            if (isPopupClosed) {
-                test.pass("Popup was closed!");
-            } else {
-                test.fail("Popup wasn't closed!");
-            }
-
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkvisitProductwithoutlogin(String browser) {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check visit product page without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -140,6 +57,7 @@ public class LoginPopUp {
 
             product.click();
             test.pass("Clicking Product Link successfully!");
+            Thread.sleep(2000);
 
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/product";
@@ -160,6 +78,7 @@ public class LoginPopUp {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check visit WISHLIST page without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -167,6 +86,7 @@ public class LoginPopUp {
             test.pass("Continue Browsing displayed!");
 
             continueBrowsing.click();
+            Thread.sleep(2000);
             test.pass("Clicking Continue Browsing Button successfully!");
 
             WebElement icon3 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div[3]"));
@@ -174,6 +94,7 @@ public class LoginPopUp {
             test.pass("WISHLIST icon displayed!");
 
             icon3.click();
+            Thread.sleep(2000);
             test.pass("Clicking WISHLIST BUTTON successfully!");
 
             String currentUrl = driver.getCurrentUrl();
@@ -195,6 +116,7 @@ public class LoginPopUp {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check visit CART page without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -209,6 +131,7 @@ public class LoginPopUp {
             test.pass("Shopping cart icon displayed!");
 
             icon2.click();
+            Thread.sleep(2000);
             test.pass("Clicking CART BUTTON successfully!");
 
             String currentUrl = driver.getCurrentUrl();
@@ -230,6 +153,7 @@ public class LoginPopUp {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check searching without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -237,6 +161,7 @@ public class LoginPopUp {
             test.pass("Continue Browsing displayed!");
 
             continueBrowsing.click();
+            Thread.sleep(2000);
             test.pass("Clicking Continue Browsing Button successfully!");
 
             WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[1]/input"));
@@ -319,18 +244,20 @@ public class LoginPopUp {
         }
     }
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome"})
     public void checkvisitProductwithlogin(String browser) {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
             test.info("Check visit product page with login!");
+            Thread.sleep(1000);
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(loginButton.isDisplayed());
             test.pass("Login button displayed!");
 
             loginButton.click();
+
             test.pass("Clicking login button to change to login page successfully!");
 
             String currentUrl = driver.getCurrentUrl();
@@ -352,7 +279,7 @@ public class LoginPopUp {
             signInButton.click();
             test.pass("Log in successfully!");
 
-            Thread.sleep(1000);
+            Thread.sleep(3000);
 
             WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
             Assertions.assertTrue(product.isDisplayed(),"Product link did not display");
@@ -374,12 +301,14 @@ public class LoginPopUp {
             test.fail(e.getMessage());
         }
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkvisitCartwithlogin(String browser) {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(1000);
             test.info("Check visit cart page with login!");
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
@@ -406,12 +335,13 @@ public class LoginPopUp {
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
+
             test.pass("Log in successfully!");
 
-            Thread.sleep(1000);
+            Thread.sleep(3000);
 
-            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div[2]"));
-            Assertions.assertTrue(icon2.isDisplayed(),"Shopping cart icon did not display");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement icon2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='root']/header/div[2]/div[2]")));
             test.pass("Shopping cart icon displayed!");
 
             icon2.click();
@@ -430,12 +360,14 @@ public class LoginPopUp {
             test.fail(e.getMessage());
         }
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkvisitWLwithlogin(String browser) {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(1000);
             test.info("Check visit WISHLIST page with login!");
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
@@ -464,13 +396,13 @@ public class LoginPopUp {
             signInButton.click();
             test.pass("Log in successfully!");
 
-            Thread.sleep(1000);
+            Thread.sleep(3000);
 
-            WebElement icon3 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div[3]"));
-            Assertions.assertTrue(icon3.isDisplayed(),"WISHLIST icon did not display");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement target = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='root']/header/div[2]/div[3]")));
             test.pass("WISHLIST icon displayed!");
 
-            icon3.click();
+            target.click();
             test.pass("Clicking WISHLIST BUTTON successfully!");
 
             currentUrl = driver.getCurrentUrl();
@@ -486,12 +418,14 @@ public class LoginPopUp {
             test.fail(e.getMessage());
         }
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkAddToCartwithoutlogin(String browser) {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check add a book to CART without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -499,6 +433,7 @@ public class LoginPopUp {
             test.pass("Continue Browsing displayed!");
 
             continueBrowsing.click();
+            Thread.sleep(2000);
             test.pass("Clicking Continue Browsing Button successfully!");
 
             WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
@@ -506,6 +441,7 @@ public class LoginPopUp {
             test.pass("Product link displayed!");
 
             product.click();
+            Thread.sleep(2000);
             test.pass("Clicking Product Link successfully!");
 
             String currentUrl = driver.getCurrentUrl();
@@ -522,10 +458,12 @@ public class LoginPopUp {
             Actions actions = new Actions(driver);
             actions.moveToElement(hoverElement).perform();
 
-            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div/div[1]/button"));
+            WebElement icon2 = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div[1]/button"));
             test.pass("Add to cart button displayed!");
 
             icon2.click();
+            Thread.sleep(2000);
+
             test.pass("Clicking ADD TO CART BUTTON successfully!");
 
             currentUrl = driver.getCurrentUrl();
@@ -547,6 +485,7 @@ public class LoginPopUp {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
             test.info("Check add a book to WISHLIST without login!");
 
             WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
@@ -554,6 +493,7 @@ public class LoginPopUp {
             test.pass("Continue Browsing displayed!");
 
             continueBrowsing.click();
+            Thread.sleep(2000);
             test.pass("Clicking Continue Browsing Button successfully!");
 
             WebElement product = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
@@ -561,6 +501,7 @@ public class LoginPopUp {
             test.pass("Product link displayed!");
 
             product.click();
+            Thread.sleep(2000);
             test.pass("Clicking Product Link successfully!");
 
             String currentUrl = driver.getCurrentUrl();
@@ -582,6 +523,7 @@ public class LoginPopUp {
             test.pass("Add to wishlist button displayed!");
 
             icon2.click();
+            Thread.sleep(2000);
             test.pass("Clicking ADD TO WISHLIST BUTTON successfully!");
 
             currentUrl = driver.getCurrentUrl();

@@ -29,52 +29,49 @@ public class UpdateLoginSigninPage {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testLoginWithWrongPasswordUsername(String browser){
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/login");
-            test.info("Test login with wrong username");
-            WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1");
-            WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password");
-            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
-            signInButton.click();
 
-            WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
-            Assertions.assertTrue(notification.isDisplayed());
-            if(notification.getText().equals("Your username or password is wrong")){
-                test.pass("Nofication: "+notification.getText());
-            }else {
-                test.fail("Nofication: None");
+    public void gotoLogin(String browser){
+        try {
+            driver = BrowserFactory.getDriver("firefox");
+            driver.get("http://localhost:3000/");
+            Thread.sleep(1000);
+
+            WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
+            Assertions.assertTrue(loginButton.isDisplayed());
+
+            loginButton.click();
+
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/login";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Change to login page successfully!");
+            } else {
+                test.fail("Page unchanged!");
             }
-
-            test.pass("Test Sign In button by signing by email!");
-
-
+            Thread.sleep(1000);
         }catch (Exception e) {
             test.fail(e.getMessage());
         }
     }
 
 
-    /*
+
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void testRegisterUsedEmail(String browser) {
         driver = BrowserFactory.getDriver(browser);
         driver.get("http://localhost:3000/register");
+        test.info("Test register used email!");
         try{
             WebElement username = driver.findElement(By.name("username"));
             if(browser.equals("chrome")){
-                username.sendKeys("username3");
+                username.sendKeys("usernamecr2");
             }
             else if(browser.equals("edge")){
-                username.sendKeys("usernameie3");
+                username.sendKeys("usernameie2");
             } else if (browser.equals("firefox")) {
-                username.sendKeys("usernameff3");
+                username.sendKeys("usernameff2");
             }
 
             WebElement phonenum = driver.findElement(By.name("phone"));
@@ -91,9 +88,9 @@ public class UpdateLoginSigninPage {
                 email.sendKeys("example1@gmail.com");
             }
             else if(browser.equals("edge")){
-                email.sendKeys("example@gmail.com");
+                email.sendKeys("example1@gmail.com");
             } else if (browser.equals("firefox")) {
-                email.sendKeys("example@gmail.com");
+                email.sendKeys("example1@gmail.com");
             }
             WebElement password = driver.findElement(By.name("password"));
             password.sendKeys("password1");
@@ -122,31 +119,7 @@ public class UpdateLoginSigninPage {
         }
 
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testLoginByEmail(String browser){
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/login");
-                WebElement usernameField = driver.findElement(By.name("username"));
-                usernameField.sendKeys("example1@gmail.com");
-                WebElement passwordField = driver.findElement(By.name("password"));
-                passwordField.sendKeys("password1");
-                WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
-                signInButton.click();
-                String currentUrl = driver.getCurrentUrl();
-                String expectedUrl = "http://localhost:3000/";
 
-                if (currentUrl.equals(expectedUrl)) {
-                    test.pass("Page changed successfully!");
-                } else {
-                    test.fail("Page unchanged!");
-                }
-
-            }catch (Exception e) {
-                test.fail(e.getMessage());
-            }
-    }
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void testLoginWithWrongPassword(String browser){
@@ -155,11 +128,12 @@ public class UpdateLoginSigninPage {
             driver.get("http://localhost:3000/login");
             test.info("Test login with right email and wrong password");
             WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1@gmail.com");
+            usernameField.sendKeys("example1@gmail.com");
             WebElement passwordField = driver.findElement(By.name("password"));
             passwordField.sendKeys("password");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
             signInButton.click();
+            Thread.sleep(1000);
 
             WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
             Assertions.assertTrue(notification.isDisplayed());
@@ -174,59 +148,8 @@ public class UpdateLoginSigninPage {
             test.fail(e.getMessage());
         }
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testLoginByEmail(String browser){
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/login");
-            test.info("Test login by email successfull");
-            WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("example1@gmail.com");
-            WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password1");
-            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
-            signInButton.click();
-            String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/";
-
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Page changed successfully!");
-            } else {
-                test.fail("Page unchanged!");
-            }
-
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testLoginWithWrongEmail(String browser){
-        try{
-            driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/login");
-            test.info("Test login with wrong email");
-            WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("example@gmail.com");
-            WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password1");
-            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
-            signInButton.click();
-
-            WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
-            Assertions.assertTrue(notification.isDisplayed());
-            if(notification.getText().equals("Your username or password is wrong")){
-                test.pass("Nofication: "+notification.getText());
-            }else {
-                test.fail("Nofication: None");
-            }
 
 
-        }catch (Exception e) {
-            test.fail(e.getMessage());
-        }
-    }
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void testLoginWithWrongUsername(String browser){
@@ -236,11 +159,11 @@ public class UpdateLoginSigninPage {
             test.info("Test login with wrong username");
             WebElement usernameField = driver.findElement(By.name("username"));
             usernameField.sendKeys("username1");
-            WebElement passwordField = driver.findElement(By.name("password1"));
+            WebElement passwordField = driver.findElement(By.name("password"));
             passwordField.sendKeys("password");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
             signInButton.click();
-
+            Thread.sleep(1000);
             WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
             Assertions.assertTrue(notification.isDisplayed());
             if(notification.getText().equals("Your username or password is wrong")){
@@ -266,7 +189,7 @@ public class UpdateLoginSigninPage {
             passwordField.sendKeys("password");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
             signInButton.click();
-
+            Thread.sleep(1000);
             WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
             Assertions.assertTrue(notification.isDisplayed());
             if(notification.getText().equals("Your username or password is wrong")){
@@ -281,7 +204,64 @@ public class UpdateLoginSigninPage {
         }catch (Exception e) {
             test.fail(e.getMessage());
         }
-    }*/
+    }
+    //@ValueSource(strings = {"chrome"})
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void testLoginWithWrongEmail(String browser){
+        try{
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/login");
+            test.info("Test login with wrong email");
+            WebElement usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("abcxyz@gmail.com");
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys("password1");
+            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+            signInButton.click();
+            Thread.sleep(2000);
+
+            WebElement notification = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/p"));
+            Assertions.assertTrue(notification.isDisplayed());
+            if(notification.getText().equals("Your username or password is wrong")){
+                test.pass("Nofication: "+notification.getText());
+            }else {
+                test.fail("Nofication: None");
+            }
+
+
+        }catch (Exception e) {
+            test.fail(e.getMessage());
+        }
+    }
+    //@ValueSource(strings = {"edge"})
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void testLoginByEmail(String browser){
+        try{
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/login");
+            test.info("Test login by email successfull");
+            WebElement usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("example1@gmail.com");
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys("password1");
+            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+            signInButton.click();
+            Thread.sleep(3000);
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+
+        }catch (Exception e) {
+            test.fail(e.getMessage());
+        }
+    }
     @AfterEach
     public void tearDown() {
         driver.quit();

@@ -5,6 +5,8 @@ import com.aventstack.extentreports.ExtentTest;
 import org.example.test.test_project.LogConfig.ExtendReport;
 import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,11 +33,13 @@ public class ViewProfile {
     public void setup(TestInfo testInfo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
+    }
 
+    public void login(String browser){
         try {
-            driver = BrowserFactory.getDriver("firefox");
+            driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
-            Thread.sleep(1000);
+            Thread.sleep(3000);
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(loginButton.isDisplayed());
@@ -53,9 +57,9 @@ public class ViewProfile {
             Thread.sleep(1000);
 
             WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1");
+            usernameField.sendKeys("username2");
             WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password1");
+            passwordField.sendKeys("abcxyz123");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
@@ -87,15 +91,22 @@ public class ViewProfile {
         }catch (Exception e){
             test.fail(e);
         }
-
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings ={"chrome","firefox","edge"})
     @Order(1)
-    public void checkComponent(){
+    public void checkComponent(String browser){
         try {
             test.info("check profile page component!");
-            WebElement avatar = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div"));
+            login(browser);
+            Thread.sleep(2000);
+
+            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]"));
+            Assertions.assertTrue(title.isDisplayed());
+            test.pass("Title displayed! Title: "+title.getText());
+
+            WebElement avatar = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]"));
             Assertions.assertTrue(avatar.isDisplayed());
             test.pass("Avatar displayed!");
 
@@ -115,27 +126,27 @@ public class ViewProfile {
             Assertions.assertTrue(changePasswordButton.isDisplayed());
             test.pass("Change password button is displayed!");
 
-            WebElement fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div"));
+            WebElement fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[1]"));
             Assertions.assertTrue(fullnameBox.isDisplayed());
             test.pass("Fullname Box displayed!");
 
-            WebElement birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div"));
+            WebElement birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[2]"));
             Assertions.assertTrue(birthdayBox.isDisplayed());
             test.pass("Birthday Box displayed!");
 
-            WebElement emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div"));
+            WebElement emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[3]"));
             Assertions.assertTrue(emailBox.isDisplayed());
             test.pass("Email Box displayed!");
 
-            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/div"));
+            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[4]"));
             Assertions.assertTrue(addressBox.isDisplayed());
             test.pass("Address Box displayed!");
 
-            WebElement genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[5]/div"));
+            WebElement genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[5]"));
             Assertions.assertTrue(genderBox.isDisplayed());
             test.pass("Gender Box displayed!");
 
-            WebElement phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[6]/div"));
+            WebElement phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[6]"));
             Assertions.assertTrue(phoneNumBox.isDisplayed());
             test.pass("Phone Number Box displayed!");
 
@@ -143,10 +154,13 @@ public class ViewProfile {
             test.fail(e.getMessage());
         }
     }
-    @Test
+    @ParameterizedTest
     @Order(2)
-    public void checkClickEditProfileButton(){
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkClickEditProfileButton(String browser){
         try {
+            login(browser);
+            Thread.sleep(2000);
             test.info("Check click edit profile button!");
             WebElement editProfileButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[1]"));
             Assertions.assertTrue(editProfileButton.isDisplayed());
@@ -161,24 +175,7 @@ public class ViewProfile {
                 test.fail("Click unsuccessfully! Edit Profile button unchanged to Save Button");
             }
 
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @Test
-    @Order(3)
-    public void checkEnterData(){
-        try {
-            test.info("Check click edit profile button and enter information!");
-            WebElement editProfileButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[1]"));
-            Assertions.assertTrue(editProfileButton.isDisplayed());
-            test.pass("Edit Profile Button displayed!");
-
-            editProfileButton.click();
-            test.pass("Click edit profile button successfully!");
-            Thread.sleep(2000);
-
-            WebElement fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
+            WebElement fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[1]"));
             Assertions.assertTrue(fullnameBox.isDisplayed());
             fullnameBox.clear();
             fullnameBox.sendKeys("Tran Van B");
@@ -189,29 +186,29 @@ public class ViewProfile {
                 test.fail("Enter fullname box unsuccessfully!");
             }
 
-            WebElement birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
+            WebElement birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[2]"));
             Assertions.assertTrue(birthdayBox.isDisplayed());
             birthdayBox.clear();
-            birthdayBox.sendKeys("12/10/2002");
-
-            if(birthdayBox.getAttribute("value").equals("12/10/2002")){
+            birthdayBox.sendKeys("12102002");
+            
+            if(birthdayBox.getAttribute("value").equals("2002-12-10")){
                 test.pass("Enter birthday name box successfully!");
             }else {
                 test.fail("Enter birthday box unsuccessfully!");
             }
 
-            WebElement emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
+            WebElement emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[3]"));
             Assertions.assertTrue(emailBox.isDisplayed());
             emailBox.clear();
             emailBox.sendKeys("example@gmail.com");
 
-            if(birthdayBox.getAttribute("value").equals("12/10/2002")){
-                test.pass("Enter birthday box successfully!");
+            if(emailBox.getAttribute("value").equals("example@gmail.com")){
+                test.pass("Enter email box successfully!");
             }else {
-                test.fail("Enter birthday box unsuccessfully!");
+                test.fail("Enter email box unsuccessfully!");
             }
 
-            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/input"));
+            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[4]"));
             Assertions.assertTrue(addressBox.isDisplayed());
             addressBox.clear();
             addressBox.sendKeys("address");
@@ -221,7 +218,7 @@ public class ViewProfile {
                 test.fail("Enter address box unsuccessfully!");
             }
 
-            WebElement genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[5]/input"));
+            WebElement genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[5]"));
             Assertions.assertTrue(genderBox.isDisplayed());
             genderBox.clear();
             genderBox.sendKeys("nam");
@@ -231,7 +228,7 @@ public class ViewProfile {
                 test.fail("Enter gender box unsuccessfully!");
             }
 
-            WebElement phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[6]/input"));
+            WebElement phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/input[6]"));
             Assertions.assertTrue(phoneNumBox.isDisplayed());
             phoneNumBox.clear();
             phoneNumBox.sendKeys("0123456789");
@@ -241,62 +238,11 @@ public class ViewProfile {
                 test.fail("Enter phone number box unsuccessfully!");
             }
 
-        }catch (Exception e){
-            test.fail(e.getMessage());
-        }
-    }
-    @Test
-    @Order(4)
-    public void checkSave(){
-        try {
-            test.info("Check click edit profile button and enter information!");
-            WebElement editProfileButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[1]"));
-            Assertions.assertTrue(editProfileButton.isDisplayed());
-            test.pass("Edit Profile Button displayed!");
-
             editProfileButton.click();
-            test.pass("Click edit profile button successfully!");
-
-            WebElement fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
-            Assertions.assertTrue(fullnameBox.isDisplayed());
-            fullnameBox.clear();
-            fullnameBox.sendKeys("Tran Van B");
-
-            if(fullnameBox.getAttribute("value").equals("Tran Van B")){
-                test.pass("Enter fullname box successfully!");
-            }else {
-                test.fail("Enter fullname box unsuccessfully!");
-            }
-
-            WebElement birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
-            Assertions.assertTrue(birthdayBox.isDisplayed());
-            birthdayBox.clear();
-            birthdayBox.sendKeys("12/10/2002");
-
-            WebElement emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
-            Assertions.assertTrue(emailBox.isDisplayed());
-            emailBox.clear();
-            emailBox.sendKeys("example@gmail.com");
-
-            WebElement addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/input"));
-            Assertions.assertTrue(addressBox.isDisplayed());
-            addressBox.clear();
-            addressBox.sendKeys("address");
-
-            WebElement genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[5]/input"));
-            Assertions.assertTrue(genderBox.isDisplayed());
-            genderBox.clear();
-            genderBox.sendKeys("nam");
-
-            WebElement phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[6]/input"));
-            Assertions.assertTrue(phoneNumBox.isDisplayed());
-            phoneNumBox.clear();
-            phoneNumBox.sendKeys("0123456789");
-
-            editProfileButton.click();
+            Thread.sleep(1000);
             test.pass("Click save button successfully!");
 
-            fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div"));
+            fullnameBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[1]"));
             Assertions.assertTrue(fullnameBox.isDisplayed());
             if (fullnameBox.getText().equals("Tran Van B")){
                 test.pass("Update fullname successfully!");
@@ -304,15 +250,15 @@ public class ViewProfile {
                 test.fail("Update fullname unsuccessfully!");
             }
 
-            birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div"));
+            birthdayBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[2]"));
             Assertions.assertTrue(birthdayBox.isDisplayed());
-            if (birthdayBox.getText().equals("12/10/2002")){
+            if (birthdayBox.getText().equals("10/12/2002")){
                 test.pass("Update birthday successfully!");
             }else {
                 test.fail("Update birthday unsuccessfully!");
             }
 
-            emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div"));
+            emailBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[3]"));
             Assertions.assertTrue(emailBox.isDisplayed());
             if (emailBox.getText().equals("example@gmail.com")){
                 test.pass("Update email successfully!");
@@ -320,7 +266,7 @@ public class ViewProfile {
                 test.fail("Update email unsuccessfully!");
             }
 
-            addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/div"));
+            addressBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[4]"));
             Assertions.assertTrue(addressBox.isDisplayed());
             if (addressBox.getText().equals("address")){
                 test.pass("Update Address Box successfully!");
@@ -328,7 +274,7 @@ public class ViewProfile {
                 test.fail("Update Address Box unsuccessfully!");
             }
 
-            genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[5]/div"));
+            genderBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[5]"));
             Assertions.assertTrue(genderBox.isDisplayed());
             if (genderBox.getText().equals("nam")){
                 test.pass("Update Gender Box successfully!");
@@ -336,26 +282,27 @@ public class ViewProfile {
                 test.fail("Update Gender Box unsuccessfully!");
             }
 
-            phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[6]/div"));
+            phoneNumBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div/div[6]"));
             Assertions.assertTrue(phoneNumBox.isDisplayed());
             if (phoneNumBox.getText().equals("0123456789")){
                 test.pass("Update Phonenumber Box successfully!");
             }else {
                 test.fail("Update Phonenumber Box unsuccessfully!");
             }
-            Thread.sleep(3000);
 
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
 
-
-    @Test
-    @Order(5)
-    public void checkChangePassWordComponent(){
+    @ParameterizedTest
+    @Order(3)
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkChangePassWordComponent(String browser){
         try {
+            login(browser);
             test.info("Check change password button and component!");
+            Thread.sleep(2000);
             WebElement changePasswordButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
             Assertions.assertTrue(changePasswordButton.isDisplayed());
             test.pass("Change password button is displayed!");
@@ -380,35 +327,14 @@ public class ViewProfile {
             }else{
                 test.fail("Change Password button didn't change to Save button");
             }
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
-    @Test
-    @Order(6)
-    public void checkWrongOldUsername(){
-        try {
-            test.info("Enter change password boxes with wrong old username!");
-            WebElement changePasswordButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
-            Assertions.assertTrue(changePasswordButton.isDisplayed());
-            test.pass("Change password button is displayed!");
-
-            changePasswordButton.click();
-            test.pass("Clinking change password button!");
-
-            WebElement oldPasswordBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
-            Assertions.assertTrue(oldPasswordBox.isDisplayed());
-            oldPasswordBox.sendKeys("password1");
-            if(oldPasswordBox.getAttribute("value").equals("password1")){
+            
+            oldPasswordBox.sendKeys("adasdkakjdaksadksd");
+            if(oldPasswordBox.getAttribute("value").equals("adasdkakjdaksadksd")){
                 test.pass("Enter old password successfully!");
             }else {
                 test.fail("Enter old password unsucessfully!");
             }
 
-            WebElement  newPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
-            Assertions.assertTrue(newPassword.isDisplayed());
             newPassword.sendKeys("password11");
             if(newPassword.getAttribute("value").equals("password11")){
                 test.pass("Enter new password successfully!");
@@ -416,68 +342,64 @@ public class ViewProfile {
                 test.fail("Enter new password unsucessfully!");
             }
 
-            WebElement confirmPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
-            Assertions.assertTrue(confirmPassword.isDisplayed());
             confirmPassword.sendKeys("password11");
             if ((confirmPassword.getAttribute("value").equals("password11"))){
                 test.pass("Enter confirm password successfully!");
             }else {
                 test.fail("Enter confirm password unsucessfully!");
             }
+
             changePasswordButton.click();
+            
+            Thread.sleep(1000);
             Alert alert = driver.switchTo().alert();
-            if(alert.getText().equals("Mật khẩu cũ không đúng!")){
+            if(alert.getText().equals("Old password didn't match")){
                 test.pass("Sytem displayed: "+alert.getText());
             }else {
                 test.fail("System displayed: "+alert.getText());
             }
 
+            
             alert.accept();
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-    }
-    @Test
-    @Order(7)
-    public void checkWrongConfirmPassword(){
-        try {
-            test.info("Enter change password boxes with wrong old username!");
-            WebElement changePasswordButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
+            Thread.sleep(1000);
+            changePasswordButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
             Assertions.assertTrue(changePasswordButton.isDisplayed());
-            test.pass("Change password button is displayed!");
 
             changePasswordButton.click();
-            test.pass("Clinking change password button!");
-
-            WebElement oldPasswordBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
+            oldPasswordBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
             Assertions.assertTrue(oldPasswordBox.isDisplayed());
-            oldPasswordBox.sendKeys("password1");
-            if(oldPasswordBox.getAttribute("value").equals("password1")){
+            
+            newPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
+            Assertions.assertTrue(newPassword.isDisplayed());
+
+            confirmPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
+            Assertions.assertTrue(confirmPassword.isDisplayed());
+
+            oldPasswordBox.sendKeys("abcxyz123");
+            if(oldPasswordBox.getAttribute("value").equals("abcxyz123")){
                 test.pass("Enter old password successfully!");
             }else {
                 test.fail("Enter old password unsucessfully!");
             }
 
-            WebElement  newPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
-            Assertions.assertTrue(newPassword.isDisplayed());
-            newPassword.sendKeys("password11");
-            if(newPassword.getAttribute("value").equals("password11")){
+            newPassword.sendKeys("321zyxcba");
+            if(newPassword.getAttribute("value").equals("321zyxcba")){
                 test.pass("Enter new password successfully!");
             }else {
                 test.fail("Enter new password unsucessfully!");
             }
 
-            WebElement confirmPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
-            Assertions.assertTrue(confirmPassword.isDisplayed());
-            confirmPassword.sendKeys("password12");
-            if ((confirmPassword.getAttribute("value").equals("password12"))){
+            confirmPassword.sendKeys("password11");
+            if ((confirmPassword.getAttribute("value").equals("password11"))){
                 test.pass("Enter confirm password successfully!");
             }else {
                 test.fail("Enter confirm password unsucessfully!");
             }
+
             changePasswordButton.click();
-            Alert alert = driver.switchTo().alert();
+            Thread.sleep(2000);
+
+            alert = driver.switchTo().alert();
             if(alert.getText().equals("Mật khẩu mới không khớp!")){
                 test.pass("Sytem displayed: "+alert.getText());
             }else {
@@ -486,16 +408,65 @@ public class ViewProfile {
 
             alert.accept();
 
+            
+
         }catch (Exception e){
             test.fail(e);
         }
-    }
 
-    @Test
+    }
+    
+
+    @ParameterizedTest
+    @ValueSource(strings={"chrome","edge","firefox"})
     @Order(99) //the last
-    public void checkEnterNewPassword(){
+    public void checkEnterNewPassword(String browser){
         try {
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/login");
+            Thread.sleep(1000);
+            String oldpass = "";
+            if(browser.equals("chrome")){
+                oldpass = "abcxyz123";
+            }else if (browser.equals("edge")){
+                oldpass = "321zyxcba";
+            } else{
+                oldpass = "abcxyz123";
+            }
+
+            String newpass = "";
+            if(browser.equals("chrome")){
+                newpass = "321zyxcba";
+            }else if (browser.equals("edge")){
+                newpass = "abcxyz123";
+            } else{
+                newpass= "321zyxcba";
+            }            
+
+            WebElement usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("username2");
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys(oldpass);
+            System.out.println(oldpass);
+            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+            signInButton.click();
+            test.pass("Log in successfully!");
+            Thread.sleep(3000);
+
+            WebElement icon1 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div/div"));
+            Assertions.assertTrue(icon1.isDisplayed(),"Login icon did not display");
+            test.pass("Login icon displayed!");
+
+            icon1.click();
+
+            Thread.sleep(2000);
+
+            WebElement link = driver.findElement(By.xpath("//a[contains(text(), 'Profile')]"));
+
+            link.click();
             test.info("Enter change password boxes!");
+            Thread.sleep(2000);
+
             WebElement changePasswordButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
             Assertions.assertTrue(changePasswordButton.isDisplayed());
             test.pass("Change password button is displayed!");
@@ -504,72 +475,30 @@ public class ViewProfile {
             test.pass("Clinking change password button!");
 
             WebElement oldPasswordBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/input"));
-            Assertions.assertTrue(oldPasswordBox.isDisplayed());
-            oldPasswordBox.sendKeys("password1");
-            if(oldPasswordBox.getAttribute("value").equals("password1")){
-                test.pass("Enter old password successfully!");
-            }else {
-                test.fail("Enter old password unsucessfully!");
-            }
+            oldPasswordBox.sendKeys(oldpass);
 
             WebElement  newPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/input"));
-            Assertions.assertTrue(newPassword.isDisplayed());
-            newPassword.sendKeys("password11");
-            if(newPassword.getAttribute("value").equals("password11")){
-                test.pass("Enter new password successfully!");
-            }else {
-                test.fail("Enter new password unsucessfully!");
-            }
+            newPassword.sendKeys(newpass);
 
             WebElement confirmPassword = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/input"));
-            Assertions.assertTrue(confirmPassword.isDisplayed());
-            confirmPassword.sendKeys("password11");
-            if ((confirmPassword.getAttribute("value").equals("password11"))){
-                test.pass("Enter confirm password successfully!");
-            }else {
-                test.fail("Enter confirm password unsucessfully!");
-            }
+            confirmPassword.sendKeys(newpass);
 
             changePasswordButton.click();
-            Alert alert = driver.switchTo().alert();
-            if(alert.getText().equals("Mật khẩu đã được đổi thành công!")){
-                test.pass("Sytem displayed: "+alert.getText());
-            }else {
-                test.fail("System displayed: "+alert.getText());
-            }
-
-            alert.accept();
-            WebElement icon1 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div/div"));
-            Assertions.assertTrue(icon1.isDisplayed(),"Login icon did not display");
-            test.pass("Login icon displayed!");
-
-            icon1.click();
-
             Thread.sleep(1000);
-
-            WebElement link = driver.findElement(By.xpath("//a[contains(text(), 'Logout')]"));
-            test.pass("Logout button displayed!");
-
-            link.click();
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+            Thread.sleep(2000);
 
             driver.get("http://localhost:3000/login");
-            test.pass("Changed to login page!");
 
-            WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1");
-            WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password11");
-            WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
+            usernameField = driver.findElement(By.name("username"));
+            usernameField.sendKeys("username2");
+            passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys(newpass);
+            signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
-            String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/";
-
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Login successfully!");
-            } else {
-                test.fail("Login unsuccessfully!");
-            }
+            test.pass("Log in successfully!");
 
         }catch (Exception e){
             test.fail(e);

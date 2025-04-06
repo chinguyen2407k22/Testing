@@ -2,17 +2,21 @@ package org.example.test.test_project.UI_UX_testing.Sprint3;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+
 import org.example.test.test_project.LogConfig.ExtendReport;
 import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
+import java.time.Duration;
 
 public class OrderDetail {
     private WebDriver driver;
@@ -35,7 +39,7 @@ public class OrderDetail {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(loginButton.isDisplayed());
@@ -45,29 +49,15 @@ public class OrderDetail {
             Thread.sleep(1000);
 
             WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1");
+            usernameField.sendKeys("username2");
             WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password1");
+            passwordField.sendKeys("321zyxcba");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
-            Thread.sleep(3000);
-
-            WebElement icon1 = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[2]/div/div"));
-            Assertions.assertTrue(icon1.isDisplayed(),"Login icon did not display");
-
-            icon1.click();
-
             Thread.sleep(1000);
 
-            WebElement link = driver.findElement(By.xpath("//a[contains(text(), 'View')]"));
-
-            link.click();
-
-            WebElement viewDetailButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/span[5]"));
-            Assertions.assertTrue(viewDetailButton.isDisplayed());
-
-            viewDetailButton.click();
+            driver.get("http://localhost:3000/order/9");
 
         }catch (Exception e){
             test.fail(e);
@@ -75,12 +65,13 @@ public class OrderDetail {
     }
 
     @ParameterizedTest
-    @ValueSource(strings ={"chrome","firefox","edge"})
+    @ValueSource(strings ={"chrome","edge","firefox"})
     public void checkComponent(String browser) {
         try {
             test.info("Test order detail page component!");
             login(browser);
-            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]"));
+            Thread.sleep(2000);
+            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/span"));
             Assertions.assertTrue(title.isDisplayed());
             test.pass("Title displayed!");
 
@@ -88,7 +79,7 @@ public class OrderDetail {
             Assertions.assertTrue(orderHistoryButton.isDisplayed());
             test.pass("Back to order history button dispalyed!");
 
-            WebElement leaveARatingButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]"));
+            WebElement leaveARatingButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div"));
             Assertions.assertTrue(leaveARatingButton.isDisplayed());
             test.pass("Leave a rating button displayed!");
 
@@ -136,14 +127,14 @@ public class OrderDetail {
         }catch (Exception e){
             test.fail(e);
         }
-
     }
     @ParameterizedTest
-    @ValueSource(strings ={"chrome","firefox","edge"})
+    @ValueSource(strings ={"chrome","edge","firefox"})
     public void checkClickbackButton(String browser) {
         try {
             test.info("Test click back to order history button!");
             login(browser);
+            Thread.sleep(2000);
 
             WebElement orderHistoryButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/span"));
             Assertions.assertTrue(orderHistoryButton.isDisplayed());
@@ -151,6 +142,7 @@ public class OrderDetail {
 
             orderHistoryButton.click();
             test.pass("Click Back to order history button!");
+            Thread.sleep(1000);
 
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/view";
@@ -166,11 +158,12 @@ public class OrderDetail {
 
     }
     @ParameterizedTest
-    @ValueSource(strings ={"chrome","firefox","edge"})
+    @ValueSource(strings ={"chrome","edge","firefox"})
     public void checkClickLeaveARatingButton(String browser) {
         try {
             test.info("Test click to leave rating button!");
             login(browser);
+            Thread.sleep(2000);
 
             WebElement leaveARatingButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]"));
             Assertions.assertTrue(leaveARatingButton.isDisplayed());
@@ -196,11 +189,12 @@ public class OrderDetail {
 
     }
     @ParameterizedTest
-    @ValueSource(strings ={"chrome","firefox","edge"})
+    @ValueSource(strings ={"firefox","chrome","edge"})
     public void checkLARComponent(String browser) {
         try {
             test.info("Test leave a rating component!");
             login(browser);
+            Thread.sleep(2000);
 
             WebElement leaveARatingButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]"));
             Assertions.assertTrue(leaveARatingButton.isDisplayed());
@@ -212,71 +206,40 @@ public class OrderDetail {
             WebElement titleLAR = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[1]/h2"));
             test.pass("Leave a rating window title displayed!\n Title: "+titleLAR.getText());
 
-            WebElement name = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/input[1]"));
+            WebElement name = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div/label[1]"));
             test.pass("name of product displayed! "+"Name: "+name.getText());
 
-            WebElement rating = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/select[1]"));
+            WebElement rating = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div/select"));
             test.pass("select rating button displayed!");
 
-            WebElement feedback = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/textarea[1]"));
-            test.pass("feed back box displayed!");
-
-            WebElement publishReview = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div"));
-            test.pass("PUBLISH FEEDBACK displayed!");
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings ={"chrome","firefox","edge"})
-    public void checkEnterFeedbackAndSelectRating(String browser) {
-        try {
-            test.info("Test enter feedback and select rating then click PUBLISH FEEDBACK button!");
-            login(browser);
-
-            WebElement leaveARatingButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]"));
-            Assertions.assertTrue(leaveARatingButton.isDisplayed());
-            test.pass("Leave a rating button displayed!");
-
-            leaveARatingButton.click();
-            test.pass("Click Leave a rating button!");
-
-            WebElement rating = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/select[1]"));
-            test.pass("select rating button displayed!");
             rating.click();
             test.pass("Click select rating button to choose rating.");
-            WebElement newRating = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/select[1]/option[2]"));
+            WebElement newRating = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div/select/option[2]"));
             newRating.click();
             test.pass("Click select rating button to choose new rating.");
 
-            WebElement feedback = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/textarea[1]"));
+            WebElement feedback = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div/textarea"));
             test.pass("feed back box displayed!");
+
             feedback.sendKeys("Good!");
             if(feedback.getAttribute("value").equals("Good!")){
                 test.pass("enter value in feedback book successfully!");
             }else {
                 test.fail("enter value in feedback book unsuccessfully!");
             }
-            Thread.sleep(2000);
-            WebElement button = driver.findElement(By.xpath("//button[text()='PUBLISH REVIEW']"));
-            button.click();
-            test.pass("click PUBLISH FEEDBACK button!");
 
-            Boolean leaveAratingWindow = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]")).isEmpty();
-            if(leaveAratingWindow){
-                test.pass("Leave a rating window disappear!");
-            }else {
-                test.fail("Leave a rating window still appear!");
-            }
+            WebElement publishReview = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/div/div/button"));
+            test.pass("PUBLISH FEEDBACK displayed!");
+            publishReview.click();
+            test.pass("click PUBLISH FEEDBACK button!");
+            Thread.sleep(1000);
 
         }catch (Exception e){
             test.fail(e);
         }
 
     }
+
 
     @AfterEach
     public void tearDown() {

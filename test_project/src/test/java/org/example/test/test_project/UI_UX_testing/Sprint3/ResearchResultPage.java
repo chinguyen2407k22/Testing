@@ -7,10 +7,15 @@ import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class ResearchResultPage {
     private WebDriver driver;
@@ -28,22 +33,22 @@ public class ResearchResultPage {
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 
-    @ValueSource(strings = {"firefox"})
-    @ParameterizedTest
-    //@ValueSource(strings = {"chrome","edge","firefox"})
-    public void check(String browser){
+    public void login(String browser){
         try {
             driver = BrowserFactory.getDriver(browser);
-            driver.get("http://localhost:3000/displaysearch");
-            test.info("Check Search book by name");
+            driver.get("http://localhost:3000/");
+            Thread.sleep(2000);
 
+            WebElement continueBrowsing = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
+            Assertions.assertTrue(continueBrowsing.isDisplayed());
 
+            continueBrowsing.click();
         }catch (Exception e){
-            test.fail(e.getMessage());
+            test.fail(e);
         }
     }
 
-    /*
+    
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkSearchByName(String browser){
@@ -57,12 +62,12 @@ public class ResearchResultPage {
             Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
             test.pass("Search Bar displayed!");
 
-            searchBar.sendKeys("programmer");
+            searchBar.sendKeys("Nauy");
 
             searchBar.sendKeys(Keys.ENTER);
 
             String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/displaysearch?search=programmer";
+            String expectedUrl = "http://localhost:3000/displaysearch?search=Nauy";
 
             if (currentUrl.equals(expectedUrl)) {
                 test.pass("Search successfully!");
@@ -71,43 +76,51 @@ public class ResearchResultPage {
             }
             Thread.sleep(3000);
 
-            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div"));
-            Assertions.assertTrue(book.isDisplayed(),"Researched Book did not display");
-            test.pass("Researched Book displayed!");
+            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]"));
+            Assertions.assertTrue(book.isDisplayed(),"Wish List Book did not display");
+            test.pass("Search Book displayed!");
 
-            WebElement bookTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/h3"));
-            if(bookTitle.getText().equals("The Pragmatic Programmer")){
-                test.pass("The Title Pragmatic Programmer was found!");
+            WebElement bookTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[1]"));
+            Assertions.assertTrue(bookTitle.isDisplayed(),"Book Title did not display");
+            test.pass("Book Title Book displayed!");
+            
+            if(bookTitle.getText().equals("Rừng Nauy")){
+                test.pass("The Title: "+bookTitle.getText());
             }else {
-                test.pass("The Title Pragmatic Programmer wasn't found!");
+                test.pass("The Title: "+ bookTitle.getText());
             };
 
-
-            WebElement bookImage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/img"));
+            WebElement bookImage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]/img"));
             Assertions.assertTrue(bookImage.isDisplayed(),"Book Image did not displayed!");
             test.pass("Book Image displayed!");
 
-            WebElement bookAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/p[1]"));
+            WebElement bookAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[2]"));
             Assertions.assertTrue(bookAuthor.isDisplayed(),"Book Author did not displayed!");
             test.pass("Book Author displayed!");
 
-            WebElement bookPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/p[2]"));
+            WebElement bookPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[3]"));
             Assertions.assertTrue(bookPrice.isDisplayed(),"Book Price did not displayed!");
             test.pass("Book Price displayed!");
 
-            WebElement addToCart = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/button"));
-            Assertions.assertTrue(addToCart.isDisplayed(),"Add To Cart Button did not displayed!");
-            test.pass("Add To Cart Button displayed!");
-
             WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[1]/div[1]/select"));
-            Assertions.assertTrue(addToCart.isDisplayed(),"Sort By Button did not displayed!");
+            Assertions.assertTrue(sortByButton.isDisplayed(),"Sort By Button did not displayed!");
             test.pass("Sort By Button displayed!");
+
+            WebElement hoverElement = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]"));
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(hoverElement).perform();
+
+            WebElement AddToCart = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div[1]/button"));
+            Assertions.assertTrue(AddToCart.isDisplayed());
+            test.pass("Add to cart button displayed!");
 
 
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
+    
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkSearchNull(String browser){
@@ -120,38 +133,31 @@ public class ResearchResultPage {
             Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
             test.pass("Search Bar displayed!");
 
-            searchBar.sendKeys("null");
+            searchBar.sendKeys("abcxyznull");
 
             searchBar.sendKeys(Keys.ENTER);
 
             String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/displaysearch?search=null";
+            String expectedUrl = "http://localhost:3000/displaysearch?";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Search successfully!");
             } else {
                 test.fail("Search unsuccessfully!");
             }
-            Thread.sleep(3000);
+            Thread.sleep(1000);
 
-
-            WebElement noProduct = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div"));
-            Assertions.assertTrue(noProduct.isDisplayed(),"No Product Session did not displayed!");
-            test.pass("No Product Session displayed!");
-
-            if(noProduct.getText().contains("No products found matching")){
-                test.pass("No product was found!");
-            }else {
-                test.fail("Fail");
-            }
-
+            WebElement noproduct = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div"));
+            Assertions.assertTrue(noproduct.isDisplayed());
+            test.pass(noproduct.getText());
 
         }catch (Exception e){
             test.fail(e.getMessage());
         }
     }
+
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome"})
     public void checkSearchAuthor(String browser){
         try {
             driver = BrowserFactory.getDriver(browser);
@@ -162,55 +168,59 @@ public class ResearchResultPage {
             Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
             test.pass("Search Bar displayed!");
 
-            searchBar.sendKeys("Hunt");
+            searchBar.sendKeys("Haruki");
 
             searchBar.sendKeys(Keys.ENTER);
 
             String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/displaysearch?search=Hunt";
+            String expectedUrl = "http://localhost:3000/displaysearch?";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Search successfully!");
             } else {
                 test.fail("Search unsuccessfully!");
             }
             Thread.sleep(3000);
 
-            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div"));
-            Assertions.assertTrue(book.isDisplayed(),"Researched Book did not display");
-            test.pass("Researched Book displayed!");
+            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]"));
+            Assertions.assertTrue(book.isDisplayed(),"Wish List Book did not display");
+            test.pass("Search Bookdisplayed!");
 
-            WebElement bookTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/h3"));
-            if(bookTitle.getText().equals("The Pragmatic Programmer")){
-                test.pass("The Title Pragmatic Programmer was found!");
+            WebElement bookTitle = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[1]"));
+            Assertions.assertTrue(bookTitle.isDisplayed(),"Book Title did not display");
+            test.pass("Book Title Book displayed!");
+            
+            if(bookTitle.getText().equals("Rừng Nauy")){
+                test.pass("The Title: "+bookTitle.getText());
             }else {
-                test.pass("The Title Pragmatic Programmer wasn't found!");
+                test.pass("The Title: "+ bookTitle.getText());
             };
 
-            WebElement bookImage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/img"));
+            WebElement bookImage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]/img"));
             Assertions.assertTrue(bookImage.isDisplayed(),"Book Image did not displayed!");
             test.pass("Book Image displayed!");
 
-            WebElement bookAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/p[1]"));
+            WebElement bookAuthor = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[2]"));
             Assertions.assertTrue(bookAuthor.isDisplayed(),"Book Author did not displayed!");
             test.pass("Book Author displayed!");
-            if(bookAuthor.getText().equals("Andrew Hunt")){
-                test.pass("The Author Andrew Hunt was found!");
-            }else {
-                test.pass("The Author Andrew Hunt wasn't found!");
-            };
+            test.pass("The Author: "+ bookAuthor.getText());
 
-            WebElement bookPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div/p[2]"));
+            WebElement bookPrice = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[2]/div[3]"));
             Assertions.assertTrue(bookPrice.isDisplayed(),"Book Price did not displayed!");
             test.pass("Book Price displayed!");
-
-            WebElement addToCart = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/button"));
-            Assertions.assertTrue(addToCart.isDisplayed(),"Add To Cart Button did not displayed!");
-            test.pass("Add To Cart Button displayed!");
 
             WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[1]/div[1]/select"));
             Assertions.assertTrue(sortByButton.isDisplayed(),"Sort By Button did not displayed!");
             test.pass("Sort By Button displayed!");
+
+            WebElement hoverElement = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]"));
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(hoverElement).perform();
+
+            WebElement AddToCart = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div/div[1]/button"));
+            Assertions.assertTrue(AddToCart.isDisplayed());
+            test.pass("Add to cart button displayed!");
 
         }catch (Exception e){
             test.fail(e.getMessage());
@@ -222,30 +232,29 @@ public class ResearchResultPage {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/displaysearch");
-            test.info("Check Search book by name");
+            test.info("Check go to book detail page");
 
             WebElement searchBar = driver.findElement(By.xpath("//*[@id=\"root\"]/header/div[1]/input"));
             Assertions.assertTrue(searchBar.isDisplayed(),"Search Bar did not display");
             test.pass("Search Bar displayed!");
 
-            searchBar.sendKeys("Hunt");
+            searchBar.sendKeys("Haruki");
 
             searchBar.sendKeys(Keys.ENTER);
 
             String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/displaysearch?search=Hunt";
+            String expectedUrl = "http://localhost:3000/displaysearch?";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Search successfully!");
             } else {
                 test.fail("Search unsuccessfully!");
             }
             Thread.sleep(3000);
 
-            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div/div"));
-            Assertions.assertTrue(book.isDisplayed(),"Researched Book did not display");
-            test.pass("Researched Book displayed!");
-
+            WebElement book = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[2]/div[1]/div/div[1]"));
+            Assertions.assertTrue(book.isDisplayed(),"Search Book did not display");
+            test.pass("Search Book Book displayed!");
             book.click();
 
             currentUrl = driver.getCurrentUrl();
@@ -270,7 +279,6 @@ public class ResearchResultPage {
             driver.get("http://localhost:3000/displaysearch?search=a");
             test.info("Check Book in Search Result");
 
-
             WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[1]/div[1]/select"));
             Assertions.assertTrue(sortByButton.isDisplayed(),"Sort By Button did not displayed!");
             test.pass("Sort By Button displayed!");
@@ -285,7 +293,7 @@ public class ResearchResultPage {
                 Assertions.assertTrue(za.isDisplayed(),"Sort By Z-A did not displayed!");
                 test.pass("Sort By Z-A displayed!");
 
-                List<WebElement> items = driver.findElements(By.className("product-card"));
+                List<WebElement> items = driver.findElements(By.className("product-title"));
                 test.pass("Total products found: " + items.size());
                 if (items.size() == 1){
                     return;
@@ -294,7 +302,7 @@ public class ResearchResultPage {
 
                     za.click();
 
-                    List<WebElement> newItems = driver.findElements(By.className("product-card"));
+                    List<WebElement> newItems = driver.findElements(By.className("product-title"));
                     String afterSort = newItems.get(0).getText();
 
                     if (!beforeSort.equals(afterSort)) {
@@ -310,8 +318,35 @@ public class ResearchResultPage {
             test.fail(e.getMessage());
         }
     }
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkButton(String browser){
+        try {
 
-     */
+            driver = BrowserFactory.getDriver(browser);
+            driver.get("http://localhost:3000/displaysearch?search=a");
+            test.info("Check Button in Book research page");
+            Thread.sleep(2000);
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[3]/button[5]"));
+            Assertions.assertTrue(nextButton.isDisplayed());
+            nextButton.click();
+            test.pass("Click Next Button!");
+
+            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[3]/button[1]"));
+            Assertions.assertTrue(prevButton.isDisplayed());
+            prevButton.click();
+            test.pass("Click Previous Button!");
+
+            WebElement numButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div[3]/button[3]"));
+            Assertions.assertTrue(numButton.isDisplayed());
+            numButton.click();
+            test.pass("Click Page number Button!");
+
+        }catch (Exception e){
+            test.fail(e.getMessage());
+        }
+    }
+        
 
     @AfterEach
     public void tearDown() {

@@ -14,7 +14,6 @@ public class BrowserFactory {
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--disable-popup-blocking");
                 driver = new ChromeDriver(options);
                 break;
             case "firefox":

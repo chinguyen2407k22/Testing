@@ -36,12 +36,13 @@ public class OrderHistory {
         try {
             driver = BrowserFactory.getDriver(browser);
             driver.get("http://localhost:3000/");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(loginButton.isDisplayed());
 
             loginButton.click();
+            Thread.sleep(1000);
 
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/login";
@@ -51,12 +52,12 @@ public class OrderHistory {
             } else {
                 test.fail("Page unchanged!");
             }
-            Thread.sleep(1000);
+            
 
             WebElement usernameField = driver.findElement(By.name("username"));
-            usernameField.sendKeys("username1");
+            usernameField.sendKeys("username2");
             WebElement passwordField = driver.findElement(By.name("password"));
-            passwordField.sendKeys("password1");
+            passwordField.sendKeys("abcxyz123");
             WebElement signInButton = driver.findElement(By.xpath("//button[span[text()='Sign In']]"));
 
             signInButton.click();
@@ -70,11 +71,10 @@ public class OrderHistory {
 
             icon1.click();
 
-            Thread.sleep(1000);
-
             WebElement link = driver.findElement(By.xpath("//a[contains(text(), 'View')]"));
 
             link.click();
+            Thread.sleep(1000);
             currentUrl = driver.getCurrentUrl();
             expectedUrl = "http://localhost:3000/view";
 
@@ -113,19 +113,19 @@ public class OrderHistory {
             test.pass("Order Row displayed!");
             test.pass("Order Row data is: "+orderRow.getText());
 
-            WebElement allbutton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]"));
+            WebElement allbutton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]"));
             Assertions.assertTrue(allbutton.isDisplayed());
             test.pass("All button is: " + allbutton.getText());
 
-            WebElement number2button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[3]"));
+            WebElement number2button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[3]"));
             Assertions.assertTrue(number2button.isDisplayed());
             test.pass("The button with number: "+number2button.getText() +" is displayed!");
 
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[8]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[5]"));
             Assertions.assertTrue(nextButton.isDisplayed());
             test.pass("Next button is display!");
 
-            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[1]"));
+            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[1]"));
             Assertions.assertTrue(prevButton.isDisplayed());
             test.pass("Previous button is display!");
 
@@ -144,28 +144,28 @@ public class OrderHistory {
             test.info("Check click button!");
             login(browser);
 
-            WebElement number2button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[3]"));
+            WebElement number2button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[3]"));
             Assertions.assertTrue(number2button.isDisplayed());
             test.pass("The button with number: "+number2button.getText() +" is displayed!");
 
             number2button.click();
             test.pass("Click button with number: "+number2button.getText());
 
-            WebElement number1button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[2]"));
+            WebElement number1button = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[2]"));
             Assertions.assertTrue(number1button.isDisplayed());
             test.pass("The button with number: "+number1button.getText() +" is displayed!");
 
             number1button.click();
             test.pass("Click button with number: "+number1button.getText());
 
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[8]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[5]"));
             Assertions.assertTrue(nextButton.isDisplayed());
             test.pass("Next button is display!");
 
             nextButton.click();
             test.pass("Click next button!");
 
-            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[8]/button[1]"));
+            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[16]/button[1]"));
             Assertions.assertTrue(prevButton.isDisplayed());
             test.pass("Previous button is display!");
 
@@ -193,7 +193,7 @@ public class OrderHistory {
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/order";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Change to orrder detail page successfully!");
             } else {
                 test.fail("Page unchanged!");
