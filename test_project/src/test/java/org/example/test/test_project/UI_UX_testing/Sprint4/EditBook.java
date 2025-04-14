@@ -2,6 +2,7 @@ package org.example.test.test_project.UI_UX_testing.Sprint4;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.example.test.test_project.LogConfig.ExtendReport;
 import org.example.test.test_project.WebBrowser.BrowserFactory;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.provider.ValueSources;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +21,10 @@ import org.openqa.selenium.WebElement;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
-public class AddNewBook {
+public class EditBook {
     private WebDriver driver;
     private static ExtentReports extent;
     private ExtentTest test;
-
     @BeforeAll
     public static void setupReport() {
         extent = ExtendReport.getInstance();
@@ -51,25 +50,42 @@ public class AddNewBook {
             signInButton.click();
             test.pass("Log in successfully!");
             Thread.sleep(1000);
-            driver.get("http://localhost:3000/add-book");
-            test.pass("Change to ADD NEW BOOK page successfully!");
+            driver.get("http://localhost:3000/product-management");
+            test.pass("Change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(1000);
 
+            List<WebElement> editButton = driver.findElements(By.className("edit-btn"));
+            if(editButton.size() <=0){
+                test.fail("Number of edit button: " + editButton.size());
+            }else{
+                test.pass("Number of edit button: " + editButton.size());
+            }
+            editButton.get(1).click();
+            Thread.sleep(1000);
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/edit-book";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Change to EDIT BOOK page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+            Thread.sleep(1000);
+            
         }catch (Exception e){
             test.fail(e);
         }
     }
-
+     
     @ParameterizedTest
-    @ValueSource(strings={"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkComponent(String browser){
         try{
-            test.info("Check ADD NEW BOOK page components!");
+            test.info("Check EDIT BOOK page components.");
             login(browser);
-
             WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/h1"));
             Assertions.assertTrue(title.isDisplayed());
-            if(title.getText().equals("ADD NEW BOOK")){
+            if(title.getText().equals("EDIT BOOK")){
                 test.pass("Title is displayed! Right title: "+title.getText());
             }else{
                 test.pass("Title is displayed! Wrong title: "+title.getText());
@@ -91,13 +107,7 @@ public class AddNewBook {
             Assertions.assertTrue(genresBox.isDisplayed());
             test.pass("Choose genres box displayed!");
 
-            WebElement brandBox = driver.findElement(By.name("brand"));
-            Assertions.assertTrue(brandBox.isDisplayed());
-            test.pass("Choose brand box displayed!");
-
-            WebElement materialBox = driver.findElement(By.name("material"));
-            Assertions.assertTrue(materialBox.isDisplayed());
-            test.pass("Choose material box displayed!");
+            test.fail("Add new genres button didn't displayed!");
 
             WebElement costBox = driver.findElement(By.name("cost"));
             Assertions.assertTrue(costBox.isDisplayed());
@@ -127,6 +137,7 @@ public class AddNewBook {
             Assertions.assertTrue(saveChangeButton.isDisplayed());
             test.pass("Save change button displayed!");
 
+
         }catch (Exception e){
             test.fail(e);
         }
@@ -140,6 +151,7 @@ public class AddNewBook {
             login(browser);
 
             WebElement nameBox = driver.findElement(By.name("name"));
+            nameBox.clear();
             nameBox.sendKeys("Harry Potter and the Goblet of Fire");
             if(nameBox.getAttribute("value").equals("Harry Potter and the Goblet of Fire")){
                 test.pass("Enter book name successfully! Book name: "+nameBox.getAttribute("value"));
@@ -148,6 +160,7 @@ public class AddNewBook {
             }
 
             WebElement authorBox = driver.findElement(By.name("author"));
+            authorBox.clear();
             authorBox.sendKeys("J. K. Rowling");
             if(authorBox.getAttribute("value").equals("J. K. Rowling")){
                 test.pass("Enter book author successfully! Book author: "+authorBox.getAttribute("value"));
@@ -156,6 +169,7 @@ public class AddNewBook {
             }
             
             WebElement editorBox = driver.findElement(By.name("editor"));
+            editorBox.clear();
             editorBox.sendKeys("someone");
             if(editorBox.getAttribute("value").equals("someone")){
                 test.pass("Enter book editor successfully! Book editor: "+editorBox.getAttribute("value"));
@@ -166,29 +180,10 @@ public class AddNewBook {
             WebElement genresBox = driver.findElement(By.name("genres"));
             test.fail("Choose Genres Box wasn't clickable!");
 
-            WebElement brandBox = driver.findElement(By.name("brand"));
-            brandBox.click();
-            test.pass("Click choose brand box.");
-
-            WebElement brandBButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[2]/div[2]/select/option[3]"));
-            brandBButton.click();
-            if(brandBox.getAttribute("value").equals("Brand B")){
-                test.pass("Choose brand successfully! Brand: "+brandBox.getAttribute("value"));
-            }else{
-                test.fail("Choose brand unsuccessfully! Brand: "+brandBox.getAttribute("value"));
-            }
-            
-            WebElement materialBox = driver.findElement(By.name("material"));
-            materialBox.click();
-            WebElement leatherMaterial = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[2]/div[3]/select/option[5]"));
-            leatherMaterial.click();
-            if(materialBox.getAttribute("value").equals("Leather")){
-                test.pass("Choose meterial successfully! Material: "+materialBox.getAttribute("value"));
-            }else{
-                test.fail("Choose meterial unsuccessfully! Material: "+materialBox.getAttribute("value"));
-            }
+            test.fail("Add more genres button didn't display.");
 
             WebElement costBox = driver.findElement(By.name("cost"));
+            costBox.clear();
             costBox.sendKeys("1.12");
             if(costBox.getAttribute("value").equals("1.12")){
                 test.pass("Enter book price successfully! Price: "+costBox.getAttribute("value"));
@@ -197,6 +192,7 @@ public class AddNewBook {
             }
 
             WebElement quantityBox = driver.findElement(By.name("quantity"));
+            quantityBox.clear();
             quantityBox.sendKeys("10");
             if(quantityBox.getAttribute("value").equals("10")){
                 test.pass("Enter book quantity successfully! Quantity: "+quantityBox.getAttribute("value"));
@@ -205,6 +201,7 @@ public class AddNewBook {
             }
 
             WebElement detailsBox = driver.findElement(By.name("details"));
+            detailsBox.clear();
             detailsBox.sendKeys("Detail infor");
             if(detailsBox.getAttribute("value").equals("Detail infor")){
                 test.pass("Enter book details successfully! Details: "+detailsBox.getAttribute("value"));
@@ -213,6 +210,7 @@ public class AddNewBook {
             }
            
             WebElement overviewBox = driver.findElement(By.name("overview"));
+            overviewBox.clear();
             overviewBox.sendKeys("overview");
             if(overviewBox.getAttribute("value").equals("overview")){
                 test.pass("Enter overview successfully! Overview: "+overviewBox.getAttribute("value"));
@@ -226,40 +224,6 @@ public class AddNewBook {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","firefox","edge"})
-    public void checkSaveChangeAnDiscardChange(String browser){
-        try{
-            test.info("Test save change button and discard change button.");
-            login(browser);
-
-            WebElement saveChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[6]/button[2]"));
-            if(!saveChangeButton.isEnabled()){
-                test.pass("Save change button disabled if users didn't complete all field.");
-            }else{
-                test.fail("Save change button enabled if users didn't complete all field.");
-            }
-
-            WebElement discardChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[6]/button[1]"));
-            Assertions.assertTrue(discardChangeButton.isDisplayed());
-            test.pass("Discard Change Button displayed!");
-            
-            discardChangeButton.click();
-            Thread.sleep(1000);
-            String currentUrl = driver.getCurrentUrl();
-            String expectedUrl = "http://localhost:3000/product-management";
-
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Page changed to PRODUCT MANAGEMENT page successfully!");
-            } else {
-                test.fail("Page unchanged!");
-            }
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     public void checkWrongInput(String browser){
@@ -329,6 +293,35 @@ public class AddNewBook {
             test.fail(e);
         }
     }
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    public void checkDiscardChange(String browser){
+        try{
+            test.info("Test discard change button.");
+            login(browser);
+
+            WebElement discardChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[6]/button[1]"));
+            Assertions.assertTrue(discardChangeButton.isDisplayed());
+            test.pass("Discard Change Button displayed!");
+            
+            discardChangeButton.click();
+            Thread.sleep(1000);
+            String currentUrl = driver.getCurrentUrl();
+            String expectedUrl = "http://localhost:3000/product-management";
+
+            if (currentUrl.equals(expectedUrl)) {
+                test.pass("Page changed to PRODUCT MANAGEMENT page successfully!");
+            } else {
+                test.fail("Page unchanged!");
+            }
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+
+    }
+
+
     @AfterEach
     public void tearDown() {
         driver.quit();
@@ -338,6 +331,5 @@ public class AddNewBook {
     public static void closeTest(){
         ExtendReport.closeReport();
     }
-
 
 }
