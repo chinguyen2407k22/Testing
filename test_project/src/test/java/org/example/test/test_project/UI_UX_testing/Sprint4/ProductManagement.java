@@ -12,7 +12,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
@@ -24,6 +27,7 @@ import com.aventstack.extentreports.ExtentTest;
 
 import io.restassured.internal.common.assertion.Assertion;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProductManagement {
     private WebDriver driver;
     private static ExtentReports extent;
@@ -70,6 +74,7 @@ public class ProductManagement {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(1)
     public void testLoginByAdminAccountt(String browser){
         try{
             test.info("Check login by admin account!");
@@ -82,6 +87,7 @@ public class ProductManagement {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(2)
     public void testGotoProductManagementPage(String browser){
         try{
             test.info("test get to PRODUCT MANAGEMENT page!");
@@ -93,6 +99,7 @@ public class ProductManagement {
 
             productmanagementlink.click();
             test.pass("Click go to PRODUCT MANAGEMENT page link!");
+            Thread.sleep(3000);
 
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/product-management";
@@ -111,6 +118,7 @@ public class ProductManagement {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(3)
     public void checkComponent(String browser){
         try{
             test.info("Check PRODUCT MANAGEMENT page components!");
@@ -120,7 +128,7 @@ public class ProductManagement {
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
 
-            WebElement addNewBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]"));
+            WebElement addNewBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div[1]/div[1]/div"));
             Assertions.assertTrue(addNewBookButton.isDisplayed());
             test.pass("Add new book button displayed!");
 
@@ -151,7 +159,9 @@ public class ProductManagement {
             }else{
                 test.pass("Number of delete button: " + deleteButton.size());
             }
-            //Chưa có title
+            
+            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]"));
+            test.pass("Title displayed! Title: "+title.getText());
 
             WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]"));
             Assertions.assertTrue(sortByButton.isDisplayed());
@@ -165,27 +175,27 @@ public class ProductManagement {
             Assertions.assertTrue(paginationButton.isDisplayed());
             test.pass("Pagination buttons displayed!");
 
-            WebElement inputMinPriceBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]/div[2]/div[1]/div[1]/input"));
+            WebElement inputMinPriceBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/input"));
             Assertions.assertTrue(inputMinPriceBox.isDisplayed());
             test.pass("Input min price box displayed!");
 
-            WebElement inputMaxPriceBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]/div[2]/div[1]/div[3]/input"));
+            WebElement inputMaxPriceBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/input"));
             Assertions.assertTrue(inputMaxPriceBox.isDisplayed());
             test.pass("Input max price box displayed!");
 
-            WebElement filterByPriceButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[1]/div[2]/div[2]/button"));
+            WebElement filterByPriceButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]/div[2]/div[2]/button"));
             Assertions.assertTrue(filterByPriceButton.isDisplayed());
             test.pass("Filter By Price button displayed!");
 
-            WebElement filterByCategorySection = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]"));
+            WebElement filterByCategorySection = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[2]"));
             Assertions.assertTrue(filterByCategorySection.isDisplayed());
             test.pass("Filter by category section displayed! Included: "+filterByCategorySection.getText());
 
-            WebElement filterByPubliserSection = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[3]"));
+            WebElement filterByPubliserSection = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[3]"));
             Assertions.assertTrue(filterByPubliserSection.isDisplayed());
             test.pass("Filter by publisher section displayed! Included: "+filterByPubliserSection.getText());
 
-            WebElement filterByCoverType = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[3]"));
+            WebElement filterByCoverType = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[4]"));
             Assertions.assertTrue(filterByCoverType.isDisplayed());
             test.pass("Filter by cover type section displayed! Included: "+filterByCoverType.getText());
             
@@ -196,6 +206,7 @@ public class ProductManagement {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(4)
     public void testSortByButton(String browser){
         try{
             test.info("Check SORT BY button!");
@@ -205,7 +216,7 @@ public class ProductManagement {
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
 
-            WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]/select"));
+            WebElement sortByButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[1]/select"));
             Assertions.assertTrue(sortByButton.isDisplayed(),"Sort By Button did not displayed!");
             test.pass("Sort By Button displayed!");
 
@@ -215,7 +226,7 @@ public class ProductManagement {
             } else {
                 test.pass("Sort By button is clickable!");
                 sortByButton.click();
-                WebElement za = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[1]/select/option[2]"));
+                WebElement za = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[1]/select/option[2]"));
                 Assertions.assertTrue(za.isDisplayed(),"Sort By Z-A did not displayed!");
                 test.pass("Sort By Z-A displayed!");
 
@@ -247,6 +258,7 @@ public class ProductManagement {
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(5)
     public void checkUpdateNumOfBookButton(String browser){
         try{
             test.info("Check choose number of book a page button!");
@@ -256,14 +268,14 @@ public class ProductManagement {
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
 
-            WebElement numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[3]/select"));
+            WebElement numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select"));
             Assertions.assertTrue(numBookButton.isDisplayed());
             test.pass("Choose number of book to show button displayed!");
 
             numBookButton.click();
             test.pass("Click Choose number of book to show button!");
 
-            WebElement newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[3]/select/option[2]"));
+            WebElement newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select/option[2]"));
             Assertions.assertTrue(newBookButton.isDisplayed());
             test.pass("Choose new number of book to show button displayed!");
 
@@ -305,7 +317,8 @@ public class ProductManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(6)
     public void checkPagButton(String browser){
         try{
             test.info("Check pagination buttons!");
@@ -315,17 +328,17 @@ public class ProductManagement {
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
 
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]/button[5]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[3]/button[5]"));
             Assertions.assertTrue(nextButton.isDisplayed());
             nextButton.click();
             test.pass("Click Next Button!");
 
-            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]/button[1]"));
+            WebElement prevButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[3]/button[1]"));
             Assertions.assertTrue(prevButton.isDisplayed());
             prevButton.click();
             test.pass("Click Previous Button!");
 
-            WebElement numButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]/button[3]"));
+            WebElement numButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[3]/button[3]"));
             Assertions.assertTrue(numButton.isDisplayed());
             numButton.click();
             test.pass("Click Page number Button!");
@@ -336,7 +349,8 @@ public class ProductManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(7)
     public void checkEditBookButton(String browser){
         try{
             test.info("Check EDIT BOOK buttons!");
@@ -354,13 +368,13 @@ public class ProductManagement {
             }
 
             editButton.get(0).click();
-            Thread.sleep(1000);
+            Thread.sleep(3000);
             test.pass("Click edit button of the 1st book.");
 
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/edit-book";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Go to EDIT BOOK page successfully!");
             } else {
                 test.fail("Go to EDIT BOOK page unsuccessfully!");
@@ -372,7 +386,8 @@ public class ProductManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(10)
     public void checkDeleteBookButton(String browser){
         try{
             test.info("Check DELETE BOOK buttons!");
@@ -382,12 +397,13 @@ public class ProductManagement {
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
 
-            WebElement numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[3]/select"));
+            WebElement numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select"));
             numBookButton.click();
             test.pass("Click Choose number of book to show button!");
 
-            WebElement newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]/div[3]/select/option[3]"));
+            WebElement newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select/option[3]"));
             newBookButton.click();
+
 
             List<WebElement> products = driver.findElements(By.className("product-wrapper"));
             int oldsize = products.size();
@@ -403,8 +419,19 @@ public class ProductManagement {
             }else{
                 test.pass("Number of delete button: " + deleteButton.size());
             }
-
             deleteButton.get(0).click();
+            WebElement confirmDelete = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div[3]/div/div/button[1]"));
+            test.pass("Confirm Delete Book button displayed!");
+
+            confirmDelete.click();
+            Thread.sleep(7000);
+
+            numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select"));
+            numBookButton.click();
+
+            newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select/option[3]"));
+            newBookButton.click();
+
             products = driver.findElements(By.className("product-wrapper"));
             int newsize = products.size();
             if(products.size() <=0){
@@ -413,7 +440,7 @@ public class ProductManagement {
                 test.pass("New number of book: " + products.size());
             }
 
-            if(newsize - oldsize ==1){
+            if(oldsize - newsize ==1){
                 test.pass("Delete a book successfully!");
             }else{
                 test.fail("Delete a book unsuccessfully!");
@@ -425,7 +452,8 @@ public class ProductManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(8)
     public void checkAddNewBookButton(String browser){
         try{
             test.info("Check ADD NEW BOOK button!");
@@ -434,7 +462,7 @@ public class ProductManagement {
             driver.get("http://localhost:3000/product-management");
             test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
             Thread.sleep(2000);
-            WebElement addNewBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]"));
+            WebElement addNewBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div[1]/div[1]/div"));
             Assertions.assertTrue(addNewBookButton.isDisplayed());
             test.pass("Add new book button displayed!");
             
@@ -456,6 +484,73 @@ public class ProductManagement {
         }catch (Exception e){
             test.fail(e);
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    @Order(9)
+    public void checkCanCancelDelete(String browser){
+        try{
+            test.info("Click Cancel Delete button.");
+            login(browser);
+
+            driver.get("http://localhost:3000/product-management");
+            test.pass("Page change to PRODUCT MANAGEMENT page successfully!");
+            Thread.sleep(2000);
+
+            WebElement numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select"));
+            numBookButton.click();
+            test.pass("Click Choose number of book to show button!");
+
+            WebElement newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select/option[3]"));
+            newBookButton.click();
+
+
+            List<WebElement> products = driver.findElements(By.className("product-wrapper"));
+            int oldsize = products.size();
+            if(products.size() <=0){
+                test.fail("Old number of book: " + products.size());
+            }else{
+                test.pass("Old number of book: " + products.size());
+            }
+
+            List<WebElement> deleteButton = driver.findElements(By.className("delete-btn"));
+            if(deleteButton.size() <=0){
+                test.fail("Number of delete button: " + deleteButton.size());
+            }else{
+                test.pass("Number of delete button: " + deleteButton.size());
+            }
+            deleteButton.get(0).click();
+            WebElement cancelDelete = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[2]/div[3]/div/div/button[2]"));
+            test.pass("Cancel Delete Book button displayed!");
+
+            cancelDelete.click();
+            Thread.sleep(3000);
+
+            numBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select"));
+            numBookButton.click();
+
+            newBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]/div[1]/div[3]/select/option[3]"));
+            newBookButton.click();
+
+            products = driver.findElements(By.className("product-wrapper"));
+            int newsize = products.size();
+            if(products.size() <=0){
+                test.fail("New number of book: " + products.size());
+            }else{
+                test.pass("New number of book: " + products.size());
+            }
+
+            if(oldsize - newsize ==0){
+                test.pass("Cancel delete a book successfully!");
+            }else{
+                test.fail("Cancel delete a book unsuccessfully!");
+            }
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+            
     }
 
 

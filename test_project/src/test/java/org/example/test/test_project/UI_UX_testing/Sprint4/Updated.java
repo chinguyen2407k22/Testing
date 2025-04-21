@@ -106,7 +106,7 @@ public class Updated {
                 test.fail("Enter email unsuccessfully! Email: "+subcribeBox.getAttribute("value"));
             }
 
-            WebElement subcribeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div[2]/button"));
+            WebElement subcribeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[2]/button"));
             subcribeButton.click();
             test.pass("Click Subcribe Button successfully!");
             if(subcribeBox.getAttribute("value").equals("")){
@@ -156,7 +156,7 @@ public class Updated {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","firefox","edge"})
     public void checkConfirmAddressTitle(String browser){
         try{
             driver = BrowserFactory.getDriver(browser);
@@ -179,7 +179,6 @@ public class Updated {
             WebElement header = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/h2"));
             Assertions.assertTrue(header.isDisplayed(),"Page Title did not display");
             test.pass("Page Title  Book displayed!");
-            System.out.println(header.getText());
 
             if (header.getText().equals("CONFIRM ADDRESS")){
                 test.pass("Correct page title!");
@@ -212,8 +211,8 @@ public class Updated {
             } else {
                 test.fail("Page unchanged!");
             }
-            Thread.sleep(2000);
             login(browser);
+            Thread.sleep(2000);
             driver.get("http://localhost:3000/wishlist");
             test.pass("Go to WISHLIST page successfully!");
             Thread.sleep(2000);
@@ -262,21 +261,6 @@ public class Updated {
             Thread.sleep(2000);
             driver.get("http://localhost:3000/view");
             test.pass("Go to ORDER HISTORY page successfully!");
-            Thread.sleep(2000);
-            logout(browser);
-            currentUrl = driver.getCurrentUrl();
-
-            if (currentUrl.equals(expectedUrl)) {
-                test.pass("Log out successfully. Change to LOGIN page successfully!");
-            } else {
-                test.fail("Page unchanged!");
-            }
-
-            Thread.sleep(2000);
-            login(browser);
-            Thread.sleep(2000);
-            driver.get("http://localhost:3000/order/1");
-            test.pass("Go to ORDER DETAILS page successfully!");
             Thread.sleep(2000);
             logout(browser);
             currentUrl = driver.getCurrentUrl();

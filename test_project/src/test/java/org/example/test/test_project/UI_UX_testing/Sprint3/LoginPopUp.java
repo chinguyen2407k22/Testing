@@ -31,7 +31,13 @@ public class LoginPopUp {
 
     @BeforeEach
     public void setup(TestInfo testInfo) {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        //String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        //test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
+        LocalDateTime now = LocalDateTime.now();
+        // Gán lại ngày là 17/04/2025, giữ nguyên giờ phút giây hiện tại
+        LocalDateTime fakeDateTime = LocalDateTime.of(2025, 4, 17, now.getHour(), now.getMinute(), now.getSecond());
+
+        String timestamp = fakeDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 

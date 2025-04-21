@@ -1,9 +1,12 @@
 package org.example.test.test_project.UI_UX_testing.Sprint4;
 
+import static org.mockito.Mockito.framework;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.apache.logging.log4j.util.PerformanceSensitive;
 import org.example.test.test_project.LogConfig.ExtendReport;
 import org.example.test.test_project.WebBrowser.BrowserFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -34,6 +37,10 @@ public class HomeManagement {
     public void setup(TestInfo testInfo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
+        //LocalDateTime now = LocalDateTime.now();
+        //LocalDateTime fakeDateTime = LocalDateTime.of(2025, 4, 17, now.getHour(), now.getMinute(), now.getSecond());
+        //String timestamp = fakeDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        //test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 
     public void login(String browser){
@@ -59,7 +66,7 @@ public class HomeManagement {
                 test.fail("Page unchanged!");
             }
             driver.get("http://localhost:3000/home-management");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             
         }catch (Exception e){
             test.fail(e);
@@ -89,23 +96,25 @@ public class HomeManagement {
             Assertions.assertTrue(navigation.isDisplayed());
             test.pass("Navigation Bar displayed. Included: "+navigation.getText());
 
-            WebElement nextBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
+            WebElement nextBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button[2]"));
             Assertions.assertTrue(nextBookButton.isDisplayed());
             test.pass("Go to next book button displayed!");
 
-            WebElement prevBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[1]"));
+            WebElement prevBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button[1]"));
             Assertions.assertTrue(prevBookButton.isDisplayed());
             test.pass("Go to previous book button displayed!");
 
-            WebElement readMoreButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button"));
+            WebElement readMoreButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(readMoreButton.isDisplayed());
             test.pass("READ MORE button displayed!");
 
-            WebElement pageBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div[2]/div[3]/button"));
+            WebElement pageBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/div[2]/div[3]"));
             Assertions.assertTrue(pageBookButton.isDisplayed());
             test.pass("Page Book button displayed!");
 
-            test.fail("Choose Another Book buttion didn't display!");
+            WebElement chooseAnotherBook = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
+            Assertions.assertTrue(chooseAnotherBook.isDisplayed());
+            test.pass("Choose Another Book button displayed!");
 
             WebElement bestSeller = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]"));
             Assertions.assertTrue(bestSeller.isDisplayed());
@@ -123,12 +132,11 @@ public class HomeManagement {
             Assertions.assertTrue(atEventName.isDisplayed());
             test.pass("Enter discount event name box displayed!");
 
-            //WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/input"));
-            //Assertions.assertTrue(discountPercent.isDisplayed());
-            //test.pass("Enter discount percent displayed!");
-            test.fail("Enter discount percent box did not display!");
+            WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/input"));
+            Assertions.assertTrue(discountPercent.isDisplayed());
+            test.pass("Enter discount percent displayed!");
 
-            WebElement discription = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[2]/input"));
+            WebElement discription = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[2]/textarea"));
             Assertions.assertTrue(discription.isDisplayed());
             test.pass("Enter discription of event box displayed!");
 
@@ -158,15 +166,15 @@ public class HomeManagement {
         try{
             test.info("Check pagination buttions");
             login(browser);
-            WebElement nextBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[2]"));
+            WebElement nextBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button[2]"));
             nextBookButton.click();
             test.pass("Click go to next book button.");
 
-            WebElement prevBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/button[1]"));
+            WebElement prevBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button[1]"));
             prevBookButton.click();
             test.pass("Click go to previous book button.");
 
-            WebElement pageBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div[2]/div[3]/button"));
+            WebElement pageBookButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/div[2]/div[3]"));
             pageBookButton.click();
             test.pass("Click go to page book button.");
 
@@ -182,7 +190,7 @@ public class HomeManagement {
             test.info("Check READ MORE button");
             login(browser);
 
-            WebElement readMoreButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/button"));
+            WebElement readMoreButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[1]"));
             Assertions.assertTrue(readMoreButton.isDisplayed());
             test.pass("READ MORE button displayed!");
 
@@ -205,70 +213,35 @@ public class HomeManagement {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void testEnterDiscountField(String browser){
-        try{
-            test.info("Check enter discount field");
-            login(browser);
-
-            WebElement atEventName = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/input"));
-            WebElement discription = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[2]/input"));
-            WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/input"));
-            WebElement endday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/input"));
-
-            //WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/input"));
-            //test.fail("Enter discount percent box did not display!");
-            atEventName.sendKeys("Event 20/10");
-            if(atEventName.getAttribute("value").equals("Event 20/10")){
-                test.pass("Enter event name successfully. Event name: "+atEventName.getAttribute("value"));
-            }else{
-                test.pass("Enter event name unsuccessfully. Event name: "+atEventName.getAttribute("value"));
-            }
-
-            discription.sendKeys("This is discription.");
-            if(discription.getAttribute("value").equals("This is discription.")){
-                test.pass("Enter event discription successfully. Event name: "+discription.getAttribute("value"));
-            }else{
-                test.pass("Enter event discription unsuccessfully. Event name: "+discription.getAttribute("value"));
-            }
-
-            startday.sendKeys("01/01/2025");
-            if(startday.getAttribute("value").equals("01/01/2025")){
-                test.pass("Enter event start day successfully. Event name: "+startday.getAttribute("value"));
-            }else{
-                test.pass("Enter event start day unsuccessfully. Event name: "+startday.getAttribute("value"));
-            }
-
-            endday.sendKeys("15/01/2025");
-            if(endday.getAttribute("value").equals("15/01/2025")){
-                test.pass("Enter event end day successfully. Event name: "+endday.getAttribute("value"));
-            }else{
-                test.pass("Enter event end day unsuccessfully. Event name: "+endday.getAttribute("value"));
-            }
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-    }
+    
 
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkWrongInput(String browser){
+    public void checkSaveChangeWithOutInput(String browser){
         try{
-            test.info("Check enter discount field with wrong format input");
+            test.info("Check click Save Button without enter input!");
             login(browser);
+            WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/input"));
+            discountPercent.clear();
+            discountPercent.sendKeys("12");
 
-            WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/input"));
-            WebElement endday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/input"));
+            WebElement saveChange = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/button[2]"));
+            saveChange.click();
+            test.pass("Click Save Change Button!");
+            Thread.sleep(1000);
 
-            startday.sendKeys("abcxyz");
-            test.pass("Enter start day: "+startday.getAttribute("value"));
-            test.fail("The system did not raise errors.");
+            WebElement nameNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/span"));
+            test.pass("Event name nofication displayed! Nofication: "+nameNofi.getText());
 
-            endday.sendKeys("abcxyz");
-            test.pass("Enter end day: "+endday.getAttribute("value"));
-            test.fail("The system did not raise errors.");
+            WebElement startNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/span"));
+            test.pass("Start Day nofication displayed! Nofication: "+startNofi.getText());
+
+            WebElement endNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/span"));
+            test.pass("End day nofication displayed! Nofication: "+endNofi.getText());
+
+            WebElement discriptNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[2]/span"));
+            test.pass("Event Discription nofication displayed! Nofication: "+discriptNofi.getText());
+
 
         }catch (Exception e){
             test.fail(e);
@@ -283,26 +256,35 @@ public class HomeManagement {
             login(browser);
 
             WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/input"));
+
             WebElement endday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/input"));
-
+            WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/input"));
+            
+            discountPercent.clear();
+            discountPercent.sendKeys("12");
             endday.sendKeys("01/01/2025");
             test.pass("Enter end day: "+endday.getAttribute("value"));
 
             startday.sendKeys("12/01/2025");
             test.pass("Enter start day: "+startday.getAttribute("value"));
-            test.fail("The system did not raise errors.");
 
-            startday.clear();
-            endday.clear();
+            WebElement saveChange = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/button[2]"));
+            saveChange.click();
+            Thread.sleep(1000);
 
-            test.info("Check enter end day less than start day.");
+            WebElement startNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/span"));
+            test.pass("Start Day nofication displayed! Nofication: "+startNofi.getText());
 
-            startday.sendKeys("12/01/2025");
-            test.pass("Enter start day: "+startday.getAttribute("value"));
+            WebElement endNofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/span"));
+            test.pass("End day nofication displayed! Nofication: "+endNofi.getText());
 
-            endday.sendKeys("01/01/2025");
-            test.pass("Enter end day: "+endday.getAttribute("value"));
-            test.fail("The system did not raise errors.");
+            List<WebElement> discountNofi = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/span"));
+            if(discountNofi.size()==0){
+                test.fail("There is no discount nofication for positive input");
+            }else{
+                test.pass("Discount Percent nofication displayed! Nofication: "+endNofi.getText());
+            }
+            
 
         }catch (Exception e){
             test.fail(e);
@@ -315,6 +297,9 @@ public class HomeManagement {
         try {
             test.info("Check DISCARD CHANGE button.");
             login(browser);
+            WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/input"));
+            discountPercent.clear();
+            discountPercent.sendKeys("12");
 
             WebElement atEventName = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/input"));
             atEventName.sendKeys("checkcheck");
@@ -337,6 +322,107 @@ public class HomeManagement {
             test.fail(e);
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void testEnterDiscountField(String browser){
+        try{
+            test.info("Check enter discount field");
+            login(browser);
+
+            WebElement atEventName = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[1]/input"));
+
+            WebElement discountPercent = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/div[2]/input"));
+
+            WebElement discription = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/div[2]/textarea"));
+
+            WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[1]/input"));
+
+            WebElement endday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[3]/div[2]/input"));
+
+            discountPercent.clear();
+            discountPercent.sendKeys("10");
+            if(discountPercent.getAttribute("value").equals("10")){
+                test.pass("Enter discount percent successfully. Discount percent: "+atEventName.getAttribute("value"));
+            }else{
+                test.fail("Enter discount percent unsuccessfully. Discount percent: "+atEventName.getAttribute("value"));
+            }
+            atEventName.sendKeys("Event 20/10");
+            if(atEventName.getAttribute("value").equals("Event 20/10")){
+                test.pass("Enter event name successfully. Event name: "+atEventName.getAttribute("value"));
+            }else{
+                test.pass("Enter event name unsuccessfully. Event name: "+atEventName.getAttribute("value"));
+            }
+
+            discription.sendKeys("This is discription.");
+            if(discription.getAttribute("value").equals("This is discription.")){
+                test.pass("Enter event discription successfully. Event discription: "+discription.getAttribute("value"));
+            }else{
+                test.pass("Enter event discription unsuccessfully. Event discription: "+discription.getAttribute("value"));
+            }
+
+            startday.sendKeys("01012025");
+            if(startday.getAttribute("value").equals("01/01/2025")){
+                test.pass("Enter event start day successfully. Event start day: "+startday.getAttribute("value"));
+            }else{
+                test.pass("Enter event start day unsuccessfully. Event start day: "+startday.getAttribute("value"));
+            }
+
+            endday.sendKeys("15012025");
+            if(endday.getAttribute("value").equals("15/01/2025")){
+                test.pass("Enter event end day successfully. End day: "+endday.getAttribute("value"));
+            }else{
+                test.pass("Enter event end day unsuccessfully. End day: "+endday.getAttribute("value"));
+            }
+            WebElement saveChange = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]/button[2]"));
+            saveChange.click();
+            test.pass("Save event successfully!");
+
+
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","firefox","edge"})
+    public void checkChooseAnotherBook(String browser){
+        try{
+            test.pass("Check click choose another book button and discard change button in choose another book pop up.");
+            login(browser);
+            WebElement chooseAnotherBook = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div/div/button[2]"));
+            chooseAnotherBook.click();
+
+            WebElement popUp = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]"));
+            test.pass("Choose Another Book Pop up displayed!");
+
+            WebElement firstPage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[2]/input"));
+            test.pass("Choose first page book box displayed");
+
+            WebElement secondPage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[3]/input"));
+            test.pass("Choose second page book box displayed");
+
+            WebElement thirdPage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[4]/input"));
+            test.pass("Choose third page book box displayed");
+
+            WebElement fourthPage = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[5]/input"));
+            test.pass("Choose fourth page book box displayed");
+
+            WebElement discardChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[6]/button[1]"));
+            test.pass("Discard Change button displayed!");
+
+            WebElement saveChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[1]/div[2]/div[6]/button[2]"));
+            test.pass("Save Change Button displayed!");
+
+            discardChangeButton.click();
+            test.pass("Click discard change button");
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
 
 
     @AfterEach
