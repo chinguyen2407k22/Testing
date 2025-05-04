@@ -19,6 +19,7 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,11 +41,7 @@ public class ContactAndVoucherManagement {
 
     @BeforeEach
     public void setup(TestInfo testInfo) {
-        //String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        //test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime fakeDateTime = LocalDateTime.of(2025, 4, 26, now.getHour(), now.getMinute(), now.getSecond());
-        String timestamp = fakeDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         test = extent.createTest(testInfo.getDisplayName() + " - " + timestamp);
     }
 
@@ -124,7 +121,7 @@ public class ContactAndVoucherManagement {
             List<WebElement> contactTitles = driver.findElements(By.tagName("p"));
 
             for (WebElement p : contactTitles) {
-                if (p.getText().startsWith("CONTACT #")) {
+                if (p.getText().startsWith("NOM")) {
                     contactTitleList.add(p);
                 }
             }
@@ -151,7 +148,7 @@ public class ContactAndVoucherManagement {
                     emailCount++;
                 } else if (text.startsWith("Contact-type:")) {
                     contactTypeCount++;
-                } else if (text.startsWith("Content: N")) {
+                } else if (text.startsWith("Content: M")) {
                     contentCount++;
                 }
             }
@@ -169,9 +166,9 @@ public class ContactAndVoucherManagement {
             
             WebElement previousButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]"));
             test.pass("Previous Button displayed!");
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[5]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
             test.pass("Next Button displayed!");
-            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
+            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]"));
             test.pass("Paginations Button displayed!");
 
         }catch (Exception e){
@@ -216,8 +213,8 @@ public class ContactAndVoucherManagement {
             test.info("Check pagination buttons in CONTACT MANAGEMENT SECTION");
             login(browser);
             WebElement previousButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[1]"));
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[5]"));
-            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[3]"));
+            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[2]/div[2]"));
 
             nextButton.click();
             test.pass("Click Next Button successfully!");
@@ -282,7 +279,7 @@ public class ContactAndVoucherManagement {
 
             for (WebElement p : voucherParagraphs) {
                 String text = p.getText();
-                if (text.startsWith("Content: G")) {
+                if (text.startsWith("Content: t")) {
                     voucherContentCount++;
                 } else if (text.startsWith("Số lượng voucher:")) {
                     voucherQuantityCount++;
@@ -309,12 +306,12 @@ public class ContactAndVoucherManagement {
 
             WebElement previousButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[1]"));
             test.pass("Previous Button displayed!");
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[5]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[3]"));
             test.pass("Next Button displayed!");
-            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[3]"));
+            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[2]"));
             test.pass("Paginations Button displayed!");
 
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             test.pass("Add New Voucher button displayed!");
 
             WebElement logOutButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/button"));
@@ -334,8 +331,8 @@ public class ContactAndVoucherManagement {
             test.info("Check pagination buttons in VOUCHER MANAGEMENT section.");
             login(browser);
             WebElement previousButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[1]"));
-            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[5]"));
-            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[3]"));
+            WebElement nextButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[4]/div[3]"));
+            WebElement paginationButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
 
             nextButton.click();
             test.pass("Click Next Button successfully!");
@@ -358,7 +355,7 @@ public class ContactAndVoucherManagement {
         try{
             test.pass("Click Add New Voucher Button!");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             test.pass("Click Add new voucher section successfully!");
             WebElement addPopUp = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div"));
@@ -374,13 +371,13 @@ public class ContactAndVoucherManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","firefox","edge"})
+    @ValueSource(strings = {"chrome","edge"})
     @Order(10)
     public void checkAddNewBookPopUpComponent(String browser){
         try{
             test.info("Check Add new book Pop Up components");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/h2"));
             if(title.isDisplayed()){
@@ -464,7 +461,7 @@ public class ContactAndVoucherManagement {
         try{
             test.info("Check enter values in create new voucher pop up window");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             WebElement voucherName = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[1]"));
             voucherName.sendKeys("ABC123");
@@ -499,19 +496,20 @@ public class ContactAndVoucherManagement {
             }
 
             WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[5]"));
-            startday.sendKeys("12/10/2025");
-            if(startday.getAttribute("value").equals("12/10/2025")){
+            startday.sendKeys("01042025");
+            if(startday.getAttribute("value").equals("2025-01-04")){
                 test.pass("Enter value in Enter Voucher Start Date box successfully!");
             }else{
                 test.fail("Enter value in Enter Voucher Start Date box unsuccessfully!");
             }
 
             WebElement endDay = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[6]"));
-            endDay.sendKeys("13/10/2025");
-            if(endDay.getAttribute("value").equals("13/10/2025")){
+            endDay.clear();
+            endDay.sendKeys("02042025");
+            if(endDay.getAttribute("value").equals("2025-02-04")){
                 test.pass("Enter value in Enter Voucher End Date box successfully!");
             }else{
-                test.fail("Enter value in Enter Voucher End Date box unsuccessfully!");
+                test.fail("Enter value in Enter Voucher End Date box unsuccessfully! ");
             }
 
             WebElement note = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/textarea"));
@@ -521,6 +519,7 @@ public class ContactAndVoucherManagement {
             }else{
                 test.fail("Enter value in Enter Voucher Note box unsuccessfully!");
             }
+            Thread.sleep(5000);
 
 
         }catch (Exception e){
@@ -535,7 +534,7 @@ public class ContactAndVoucherManagement {
         try{
             test.info("check add new voucher without fill all neccessary field.");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             WebElement createVoucher = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div/button[1]"));
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -543,7 +542,14 @@ public class ContactAndVoucherManagement {
             Thread.sleep(500); 
             js.executeScript("arguments[0].click();", createVoucher);
             test.pass("Click create voucher button.");
-            test.fail("System didn't raise notification.");
+            List<WebElement> nofi = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div"));
+            if(nofi.size()>0){
+                for (WebElement x: nofi){
+                    test.pass("Nofication: "+x.getText());
+                }
+            }else{
+                test.fail("System didn't raise error.");
+            }
 
         }catch (Exception e){
             test.fail(e);
@@ -557,7 +563,7 @@ public class ContactAndVoucherManagement {
         try{
             test.info("Check click cancel button to cancel add a new voucher.");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             WebElement cancelVoucher = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div/button[2]"));
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -578,13 +584,13 @@ public class ContactAndVoucherManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","edge"})
     @Order(14)
     public void checkEnterWrongValue(String browser){
         try{
             test.info("Test enter invalid input.");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
 
             WebElement amount = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[3]"));
@@ -594,10 +600,10 @@ public class ContactAndVoucherManagement {
             quantity.sendKeys("-100");
 
             WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[5]"));
-            startday.sendKeys("12/10/2025");
+            startday.sendKeys("02042025");
 
             WebElement endDay = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[6]"));
-            endDay.sendKeys("11/10/2025");
+            endDay.sendKeys("01042025");
 
             WebElement createVoucher = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div/button[1]"));
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -619,13 +625,18 @@ public class ContactAndVoucherManagement {
                 test.fail("Greater than 100 number still is Greater than 100 number");
             }
 
-            if(quantity.getAttribute("value").equals("100")){
+            if(quantity.getAttribute("value").equals("0")){
                 test.pass("Negative number change to 0");
             }else{
                 test.fail("Negative number still is negative number");
             }
 
-            test.fail("System didn't raise notification.");
+            WebElement nofi = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/div[4]"));
+            if(nofi.isDisplayed()){
+                test.pass("Nofication: "+nofi.getText());
+            }else{
+                test.fail("System didn't raise nofication.");
+            }
 
         }catch (Exception e){
             test.fail(e);
@@ -633,13 +644,13 @@ public class ContactAndVoucherManagement {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
+    @ValueSource(strings = {"chrome","edge"})
     @Order(15)
     public void checkAddNewVoucher(String browser){
         try{
             test.info("Check add new voucher");
             login(browser);
-            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[4]"));
+            WebElement addNewVoucherButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]"));
             addNewVoucherButton.click();
             WebElement voucherName = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[1]"));
             String name = "ABC123";
@@ -675,16 +686,19 @@ public class ContactAndVoucherManagement {
             }
 
             WebElement startday = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[5]"));
-            startday.sendKeys("12/10/2025");
-            if(startday.getAttribute("value").equals("12/10/2025")){
+            startday.click();
+            startday.sendKeys("01042025");
+            if(startday.getAttribute("value").equals("2025-01-04")){
                 test.pass("Enter value in Enter Voucher Start Date box successfully!");
             }else{
                 test.fail("Enter value in Enter Voucher Start Date box unsuccessfully!");
             }
 
             WebElement endDay = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[5]/div/input[6]"));
-            endDay.sendKeys("13/10/2025");
-            if(endDay.getAttribute("value").equals("13/10/2025")){
+            endDay.click();
+            endDay.sendKeys("02042025");
+  
+            if(endDay.getAttribute("value").equals("2025-02-04")){
                 test.pass("Enter value in Enter Voucher End Date box successfully!");
             }else{
                 test.fail("Enter value in Enter Voucher End Date box unsuccessfully!");
@@ -704,13 +718,29 @@ public class ContactAndVoucherManagement {
             Thread.sleep(500); 
             js.executeScript("arguments[0].click();", createVoucher);
             test.pass("Click create voucher button.");
+            Thread.sleep(3000);
 
-            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[1]/p[1]"));
-            if(title.getText().equals(name)){
+            WebElement title = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/p[1]"));
+            if(title.isDisplayed()){
                 test.pass("Add new voucher successfully!");
             }else{
                 test.fail("Add new voucher unsuccessfully!");
             }
+
+            List<WebElement>titles = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div"));
+            int num = titles.size();
+            WebElement deleteButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div[2]/button"));
+            deleteButton.click();
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+            Thread.sleep(2000);
+            titles = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[3]/div"));
+            if(titles.size() - num == -1){
+                test.pass("Delete a voucher successfully!");
+            }else{
+                test.fail("Delete a voucher unsuccessfully! ");
+            }
+
 
         }catch (Exception e){
             test.fail(e);

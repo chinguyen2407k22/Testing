@@ -58,6 +58,7 @@ public class OrderManagement {
             driver.get("http://localhost:3000/home-management");
             WebElement orderlink = driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/div/a[3]"));
             orderlink.click();
+            Thread.sleep(5000);
 
         }catch (Exception e){
             test.fail(e);
@@ -320,7 +321,7 @@ public class OrderManagement {
             }
 
             List<WebElement> pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
-            viewOrderDetails = driver.findElements(By.cssSelector(".view-details.pending"));
+            viewOrderDetails = driver.findElements(By.cssSelector(".view-details.pickup"));
             if(viewOrderDetails.size() == pickuporders.size()){
                 test.pass("The number of view details buttons matched the number of orders.");
             }else{
@@ -362,37 +363,40 @@ public class OrderManagement {
             String currentUrl = driver.getCurrentUrl();
             String expectedUrl = "http://localhost:3000/order-details";
 
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Page changed to ORDER DETAILS page successfully!");
             } else {
                 test.fail("Page unchanged!");
             }
 
             driver.get("http://localhost:3000/order-management");   
+            Thread.sleep(2000);
             viewOrderDetails = driver.findElements(By.cssSelector(".view-details.pickup"));
             viewOrderDetails.get(0).click();
             test.pass("Click Order Details button in pick up section successfully! ");
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Page changed to ORDER DETAILS page successfully!");
             } else {
             test.fail("Page unchanged!");
             }
 
             driver.get("http://localhost:3000/order-management"); 
+            Thread.sleep(2000);
             viewOrderDetails = driver.findElements(By.cssSelector(".view-details.delivering"));
             viewOrderDetails.get(0).click();
             test.pass("Click Order Details button in delivering section successfully! ");
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Page changed to ORDER DETAILS page successfully!");
             } else {
                 test.fail("Page unchanged!");
             }
 
             driver.get("http://localhost:3000/order-management"); 
+            Thread.sleep(2000);
             viewOrderDetails = driver.findElements(By.cssSelector(".view-details.rating"));
             test.pass("Click Order Details button in rating section successfully! ");
             viewOrderDetails.get(0).click();
-            if (currentUrl.equals(expectedUrl)) {
+            if (currentUrl.contains(expectedUrl)) {
                 test.pass("Page changed to ORDER DETAILS page successfully!");
             } else {
                 test.fail("Page unchanged!");
@@ -403,185 +407,10 @@ public class OrderManagement {
         }
         
     }
-
+    
     @ParameterizedTest
     @ValueSource(strings = {"chrome","edge","firefox"})
     @Order(9)
-    public void checkConfirmButton(String browser){
-        try{
-            test.info("Check confirm button");
-            login(browser);
-            List<WebElement> pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
-            List<WebElement> pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
-            int pendingOldSize = pendingorders.size();
-            int pickupOldSize = pickuporders.size();
-
-            List<WebElement> confirmButtons = driver.findElements(By.className("btn-confirm"));
-            confirmButtons.get(0).click();
-            test.pass("Click confirm button successfully!");
-
-            pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
-            pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
-            int pendingNewSize = pendingorders.size();
-            int pickupNewSize = pickuporders.size();
-
-            if(pendingNewSize == pendingOldSize -1 && pickupNewSize == pickupOldSize +1){
-                test.pass("Change order status from pending to wating to be picked up successfully!");
-            }else{
-                test.fail("Order status unchanged");
-            }
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
-
-    @ParameterizedTest
-    @Order(10)
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkCancelButton(String browser){
-        try{
-            test.info("Check cancel button");
-            login(browser);
-            List<WebElement> pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
-            int pendingOldSize = pendingorders.size();
-            
-            List<WebElement> cancelButtons = driver.findElements(By.cssSelector(".order-header.pending"));
-            cancelButtons.get(0).click();
-            test.pass("Click cancel button successfully!");
-
-            pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
-            int pendingNewSize = pendingorders.size();
-
-            if(pendingNewSize == pendingOldSize -1 ){
-                test.pass("Delete an order from pending section");
-            }else{
-                test.fail("Orders in pending section unchanged");
-            }
-        }catch (Exception e){
-            test.fail(e);
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    @Order(11)
-    public void checkDeliveryButton(String browser){
-        try{
-            test.pass("Check deliver buttons");
-            login(browser);
-            List<WebElement> pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
-            List<WebElement> deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
-            int pickupOldSize = pickuporders.size();
-            int deliveringOldSize = deliveringorders.size();
-
-            List<WebElement> deliveryButtons = driver.findElements(By.className("btn-delivery"));
-            deliveryButtons.get(0).click();
-            test.pass("Click deliver button successfully!");
-
-            pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
-            deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
-            int pickupNewSize = pickuporders.size();
-            int deliveringNewSize = deliveringorders.size();
-
-            if(pickupNewSize == pickupOldSize -1 && deliveringNewSize == deliveringOldSize +1){
-                test.pass("Change order status from wating to be picked up to delivering successfully!");
-            }else{
-                test.fail("Order status unchanged");
-            }
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    @Order(12)
-    public void checkCompleteButton(String browser){
-        try{
-            test.pass("Check complete buttons");
-            login(browser);
-            
-            List<WebElement> deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
-            List<WebElement> ratingorders = driver.findElements(By.cssSelector(".order-card.rating"));
-            int deliveringOldSize = deliveringorders.size();
-            int ratingOldSize = ratingorders.size();
-
-            List<WebElement> compeleteButtons = driver.findElements(By.className("btn-complete"));
-            compeleteButtons.get(0).click();
-            test.pass("Click complete button successfully!");
-
-            deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
-            ratingorders = driver.findElements(By.cssSelector(".order-card.rating"));
-            int deliveringNewSize = deliveringorders.size();
-            int ratingNewSize = ratingorders.size();
-
-            if(ratingNewSize == ratingOldSize + 1 && deliveringNewSize == deliveringOldSize - 1){
-                test.pass("Change order status from delivering to view rating successfully!");
-            }else{
-                test.fail("Order status unchanged");
-            }
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    @Order(13)
-    public void checkPaginationButton(String browser){
-        try{
-            test.info("Check click pagination button");
-            login(browser);
-            List<WebElement> arrowButtons = driver.findElements(By.cssSelector(".arrow-button.pending"));
-            arrowButtons.get(0).click();
-            test.pass("Click previous button in pending section.");
-            arrowButtons.get(1).click();
-            test.pass("Click next button in pending section.");
-            List<WebElement> paginationButtons = driver.findElements(By.cssSelector(".pagination-button.pending"));
-            paginationButtons.get(1);
-            test.pass("Click a pagination button in pending section.");
-
-            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.pickup"));
-            arrowButtons.get(0).click();
-            test.pass("Click previous button in waiting to be picked up section.");
-            arrowButtons.get(1).click();
-            test.pass("Click next button in waiting to be picked up section.");
-            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.pickup"));
-            paginationButtons.get(1);
-            test.pass("Click a pagination button in waiting to be picked up section.");
-
-            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.delivering"));
-            arrowButtons.get(0).click();
-            test.pass("Click previous button in delivering section.");
-            arrowButtons.get(1).click();
-            test.pass("Click next button in delivering section.");
-            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.delivering"));
-            paginationButtons.get(1);
-            test.pass("Click a pagination button in delivering section.");
-
-            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.rating"));
-            arrowButtons.get(0).click();
-            test.pass("Click previous button in view rating section.");
-            arrowButtons.get(1).click();
-            test.pass("Click next button in view rating section.");
-            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.rating"));
-            paginationButtons.get(1);
-            test.pass("Click a pagination button in view rating section.");
-
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    @Order(14)
     public void testHiddenButton(String browser){
         try{
             test.pass("Check + - button to hidden or display orders in each section");
@@ -654,8 +483,196 @@ public class OrderManagement {
             test.fail(e);
         }
     }
-    
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(10)
+    public void checkPaginationButton(String browser){
+        try{
+            test.info("Check click pagination button");
+            login(browser);
+            List<WebElement> arrowButtons = driver.findElements(By.cssSelector(".arrow-button.pending"));
+            arrowButtons.get(0).click();
+            test.pass("Click previous button in pending section.");
+            arrowButtons.get(1).click();
+            test.pass("Click next button in pending section.");
+            List<WebElement> paginationButtons = driver.findElements(By.cssSelector(".pagination-button.pending"));
+            paginationButtons.get(0);
+            test.pass("Click a pagination button in pending section.");
+            Thread.sleep(3000);
 
+            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.pickup"));
+            arrowButtons.get(0).click();
+            test.pass("Click previous button in waiting to be picked up section.");
+            arrowButtons.get(1).click();
+            test.pass("Click next button in waiting to be picked up section.");
+            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.pickup"));
+            paginationButtons.get(0);
+            test.pass("Click a pagination button in waiting to be picked up section.");
+
+            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.delivering"));
+            arrowButtons.get(0).click();
+            test.pass("Click previous button in delivering section.");
+            arrowButtons.get(1).click();
+            test.pass("Click next button in delivering section.");
+            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.delivering"));
+            paginationButtons.get(0);
+            test.pass("Click a pagination button in delivering section.");
+
+            arrowButtons = driver.findElements(By.cssSelector(".arrow-button.rating"));
+            arrowButtons.get(0).click();
+            test.pass("Click previous button in view rating section.");
+            arrowButtons.get(1).click();
+            test.pass("Click next button in view rating section.");
+            paginationButtons = driver.findElements(By.cssSelector(".pagination-button.rating"));
+            paginationButtons.get(0);
+            test.pass("Click a pagination button in view rating section.");
+
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(11)
+    public void checkConfirmButton(String browser){
+        try{
+            test.info("Check confirm button");
+            login(browser);
+            List<WebElement> pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
+            List<WebElement> pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
+            int pendingOldSize = pendingorders.size();
+            int pickupOldSize = pickuporders.size();
+
+            List<WebElement> confirmButtons = driver.findElements(By.className("btn-confirm"));
+            confirmButtons.get(0).click();
+            test.pass("Click confirm button successfully!");
+            driver.get("http://localhost:3000/order-management");
+            Thread.sleep(3000);
+
+            pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
+            pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
+            int pendingNewSize = pendingorders.size();
+            int pickupNewSize = pickuporders.size();
+
+            if(pendingNewSize == pendingOldSize -1 && pickupNewSize == pickupOldSize +1){
+                test.pass("Change order status from pending to wating to be picked up successfully!");
+            }else{
+                test.fail("Order status unchanged");
+            }
+        }catch (Exception e){
+            test.fail(e);
+        }
+
+    }
+
+    @ParameterizedTest
+    @Order(12)
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    public void checkCancelButton(String browser){
+        try{
+            test.info("Check cancel button");
+            login(browser);
+            List<WebElement> pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
+            int pendingOldSize = pendingorders.size();
+            
+            List<WebElement> cancelButtons = driver.findElements(By.className("btn-cancel"));
+            cancelButtons.get(0).click();
+            test.pass("Click cancel button successfully!");
+            driver.get("http://localhost:3000/order-management");
+            Thread.sleep(3000);
+
+            pendingorders = driver.findElements(By.cssSelector(".order-card.pending"));
+            int pendingNewSize = pendingorders.size();
+
+            if(pendingNewSize == pendingOldSize -1 ){
+                test.pass("Delete an order from pending section");
+            }else{
+                test.fail("Orders in pending section unchanged");
+            }
+        }catch (Exception e){
+            test.fail(e);
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(13)
+    public void checkDeliveryButton(String browser){
+        try{
+            test.pass("Check deliver buttons");
+            login(browser);
+            List<WebElement> pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
+            List<WebElement> deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
+            int pickupOldSize = pickuporders.size();
+            int deliveringOldSize = deliveringorders.size();
+
+            List<WebElement> deliveryButtons = driver.findElements(By.className("btn-delivery"));
+            deliveryButtons.get(0).click();
+            driver.get("http://localhost:3000/order-management");
+            test.pass("Click deliver button successfully!");
+            Thread.sleep(3000);
+
+            pickuporders = driver.findElements(By.cssSelector(".order-card.pickup"));
+            deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
+            
+            int pickupNewSize = pickuporders.size();
+            int deliveringNewSize = deliveringorders.size();
+
+            if(pickupNewSize == pickupOldSize -1 && deliveringNewSize == deliveringOldSize +1){
+                test.pass("Change order status from wating to be picked up to delivering successfully!");
+            }else{
+                test.fail("Order status unchanged");
+                test.fail(""+pickupNewSize);
+                test.fail(""+deliveringNewSize);
+                test.fail(""+pickupOldSize);
+                test.fail(""+deliveringOldSize);
+            }
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(14)
+    public void checkCompleteButton(String browser){
+        try{
+            test.pass("Check complete buttons");
+            login(browser);
+            
+            List<WebElement> deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
+            List<WebElement> ratingorders = driver.findElements(By.cssSelector(".order-card.rating"));
+            int deliveringOldSize = deliveringorders.size();
+            int ratingOldSize = ratingorders.size();
+
+            List<WebElement> compeleteButtons = driver.findElements(By.className("btn-complete"));
+            compeleteButtons.get(0).click();
+            test.pass("Click complete button successfully!");
+            driver.get("http://localhost:3000/order-management");
+            Thread.sleep(3000);
+
+            deliveringorders = driver.findElements(By.cssSelector(".order-card.delivering"));
+            ratingorders = driver.findElements(By.cssSelector(".order-card.rating"));
+            int deliveringNewSize = deliveringorders.size();
+            int ratingNewSize = ratingorders.size();
+
+            if(ratingNewSize == ratingOldSize + 1 && deliveringNewSize == deliveringOldSize - 1){
+                test.pass("Change order status from delivering to view rating successfully!");
+            }else{
+                test.fail("Order status unchanged");
+            }
+
+        }catch (Exception e){
+            test.fail(e);
+        }
+
+    }
+
+    
 
     @AfterEach
     public void tearDown() {

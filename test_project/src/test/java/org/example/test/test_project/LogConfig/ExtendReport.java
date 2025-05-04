@@ -14,8 +14,8 @@ public class ExtendReport {
         if (extent == null) {
             // Format ngày tháng
             String timestamp = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            timestamp = "2025-04-26";
-            String logPath = "./src/test/java/org/example/test/test_project/Logs/Sprint5/ContactAndVoucherManagementReport_" + timestamp + ".html";
+            timestamp = "2025-05-02";
+            String logPath = "./src/test/java/org/example/test/test_project/Logs/Sprint5/OrderManagementReport_" + timestamp + ".html";
 
             ExtentSparkReporter reporter = new ExtentSparkReporter(logPath);
             reporter.config().setReportName("Automation Test Report - " + timestamp);

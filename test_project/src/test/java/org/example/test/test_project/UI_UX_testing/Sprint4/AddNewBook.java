@@ -64,7 +64,7 @@ public class AddNewBook {
         }
     }
 
-    /*@ParameterizedTest
+    @ParameterizedTest
     @ValueSource(strings={"chrome","edge","firefox"})
     @Order(1)
     public void checkComponent(String browser){
@@ -155,10 +155,10 @@ public class AddNewBook {
         }catch (Exception e){
             test.fail(e);
         }
-    }*/
+    }
 
     @ParameterizedTest
-    @ValueSource(strings = {"chrome"})
+    @ValueSource(strings = {"chrome","edge","firefox"})
     @Order(2)
     public void checkEnterBox(String browser){
         try{
@@ -219,7 +219,7 @@ public class AddNewBook {
 
             element = driver.findElement(By.xpath("//*[text()='Hardcover']"));
             element.click();
-            if(brandBox.getText().contains("Hardcover")){
+            if(coverTypeBox.getText().contains("Hardcover")){
                 test.pass("Choose cover type successfully!");
             }else{
                 test.fail("Choose cover type unsuccessfully!");
@@ -234,61 +234,85 @@ public class AddNewBook {
             }
 
             WebElement quantityBox = driver.findElement(By.name("inventoryQuantity"));
-            Assertions.assertTrue(quantityBox.isDisplayed());
-            test.pass("Enter inventory quantity box displayed!");
+            quantityBox.sendKeys("100");
+            if(quantityBox.getAttribute("value").equals("100")){
+                test.pass("Enter value in quantity box successfully!");
+            }else{
+                test.fail("Enter value in quantity box unsuccessfully!");
+            }
 
             WebElement publisherBox = driver.findElement(By.name("publisher"));
-            Assertions.assertTrue(publisherBox.isDisplayed());
-            test.pass("Enter publisher box displayed!");
+            publisherBox.sendKeys("unknown");
+            if(publisherBox.getAttribute("value").equals("unknown")){
+                test.pass("Enter value in publisher box successfully!");
+            }else{
+                test.fail("Enter value in publisher box unsuccessfully!");
+            }
 
             WebElement publishingYearBox = driver.findElement(By.name("publishingYear"));
-            Assertions.assertTrue(publishingYearBox.isDisplayed());
-            test.pass("Enter publishing year box displayed!");
+            publishingYearBox.sendKeys("2025");
+            if(publishingYearBox.getAttribute("value").equals("2025")){
+                test.pass("Enter value in publishing year box successfully!");
+            }else{
+                test.fail("Enter value in publishing year box unsuccessfully!");
+            }
 
             WebElement distributorBox = driver.findElement(By.name("distributor"));
-            Assertions.assertTrue(distributorBox.isDisplayed());
-            test.pass("Enter distributor box displayed!");
+            distributorBox.sendKeys("unknown");
+            if(distributorBox.getAttribute("value").equals("unknown")){
+                test.pass("Enter value in distributor box successfully!");
+            }else{
+                test.fail("Enter value in distributor box unsuccessfully!");
+            }
 
             WebElement dimensionsBox = driver.findElement(By.name("dimensions"));
-            Assertions.assertTrue(dimensionsBox.isDisplayed());
-            test.pass("Enter dimensions box displayed!");
+            dimensionsBox.sendKeys("15x20");
+            if(dimensionsBox.getAttribute("value").equals("15x20")){
+                test.pass("Enter value in dimension box successfully!");
+            }else{
+                test.fail("Enter value in dimension box unsuccessfully!");
+            }
+            
 
             WebElement pagesBox = driver.findElement(By.name("pages"));
-            Assertions.assertTrue(pagesBox.isDisplayed());
-            test.pass("Enter number of pages box displayed!");
-
+            pagesBox.sendKeys("15");
+            if(pagesBox.getAttribute("value").equals("15")){
+                test.pass("Enter value in pages box successfully!");
+            }else{
+                test.fail("Enter value in pages box unsuccessfully!");
+            }
+            
             WebElement publishingCompanyBox = driver.findElement(By.name("publishingCompany"));
-            Assertions.assertTrue(publishingCompanyBox.isDisplayed());
-            test.pass("Enter publishing company box displayed!");
-
-            WebElement bookImageBox = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[4]/div"));
-            Assertions.assertTrue(bookImageBox.isDisplayed());
-            test.pass("Select book image box displayed!");
+            publishingCompanyBox.sendKeys("unknown");
+            if(publishingCompanyBox.getAttribute("value").equals("unknown")){
+                test.pass("Enter value in publishing company box successfully!");
+            }else{
+                test.fail("Enter value in publishing company box unsuccessfully!");
+            }
 
             WebElement summaryBox = driver.findElement(By.name("summary"));
-            Assertions.assertTrue(summaryBox.isDisplayed());
-            test.pass("Enter summary box displayed!");
+            summaryBox.sendKeys("this is a summary");
+            if(summaryBox.getAttribute("value").equals("this is a summary")){
+                test.pass("Enter value in summary box successfully!");
+            }else{
+                test.fail("Enter value in summary box unsuccessfully!");
+            }
+            Thread.sleep(5000);
 
         }catch (Exception e){
             test.fail(e);
         }
     }
 
-    /*@ParameterizedTest
-    @ValueSource(strings = {"chrome","firefox","edge"})
-    public void checkSaveChangeAnDiscardChange(String browser){
+    @ParameterizedTest
+    @ValueSource(strings = {"chrome","edge","firefox"})
+    @Order(3)
+    public void checkDiscardChange(String browser){
         try{
-            test.info("Test save change button and discard change button.");
+            test.info("Test discard change button.");
             login(browser);
 
-            WebElement saveChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[6]/button[2]"));
-            if(!saveChangeButton.isEnabled()){
-                test.pass("Save change button disabled if users didn't complete all field.");
-            }else{
-                test.fail("Save change button enabled if users didn't complete all field.");
-            }
-
-            WebElement discardChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[6]/button[1]"));
+            WebElement discardChangeButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/form/div[8]/button[1]"));
             Assertions.assertTrue(discardChangeButton.isDisplayed());
             test.pass("Discard Change Button displayed!");
             
@@ -308,75 +332,7 @@ public class AddNewBook {
         }
 
     }
-    @ParameterizedTest
-    @ValueSource(strings = {"chrome","edge","firefox"})
-    public void checkWrongInput(String browser){
-        try{
-            test.info("Test enter infomation boxes with wrong format!");
-            login(browser);
-            WebElement nameBox = driver.findElement(By.name("name"));
-            String term = "";
-            for(int i=0;i<120;i++){
-                term = term + "a";
-            }
-            nameBox.sendKeys(term);
-            test.pass("Enter name: "+term);
-            test.fail("The system did not raise errors.");
-
-            WebElement authorBox = driver.findElement(By.name("author"));
-            authorBox.sendKeys(term);
-            test.pass("Enter author: "+term);
-            test.fail("The system did not raise errors.");
-            
-            WebElement editorBox = driver.findElement(By.name("editor"));
-            editorBox.sendKeys(term);
-            test.pass("Enter editor: "+term);
-            test.fail("The system did not raise errors.");
-
-            WebElement costBox = driver.findElement(By.name("cost"));
-            costBox.sendKeys("100000");
-            test.pass("Enter cost: 100000");
-            test.fail("The system did not raise errors.");
-
-            costBox.clear();
-            costBox.sendKeys("-1.12");
-            if(costBox.getAttribute("value").equals("0")){
-                test.pass("Enter book negative price unsuccessfully! Price: "+costBox.getAttribute("value"));
-            }else{
-                test.fail("Enter book negative price successfully! Price: "+costBox.getAttribute("value"));
-            }
-
-            WebElement quantityBox = driver.findElement(By.name("quantity"));
-            quantityBox.sendKeys("100000");
-            test.pass("Enter quantity: 100000");
-            test.fail("The system did not raise errors.");
-
-            quantityBox.clear();
-            quantityBox.sendKeys("-10");
-            if(quantityBox.getAttribute("value").equals("0")){
-                test.pass("Enter book negative quantity unsuccessfully! Quantity: "+quantityBox.getAttribute("value"));
-            }else{
-                test.fail("Enter book negative quantity successfully! Quantity: "+quantityBox.getAttribute("value"));
-            }
-            for(int i=0;i<400;i++){
-                term = term + "a";
-            }
-
-            WebElement detailsBox = driver.findElement(By.name("details"));
-            detailsBox.sendKeys(term);
-            test.pass("Enter details: "+term);
-            test.fail("The system did not raise errors.");
-            
-           
-            WebElement overviewBox = driver.findElement(By.name("overview"));
-            overviewBox.sendKeys(term);
-            test.pass("Enter overview: "+term);
-            test.fail("The system did not raise errors.");
-
-        }catch (Exception e){
-            test.fail(e);
-        }
-    }*/
+    
     @AfterEach
     public void tearDown() {
         driver.quit();
