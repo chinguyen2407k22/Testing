@@ -21,7 +21,7 @@ import org.openqa.selenium.WebElement;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
-public class AddBookIntoCard {
+public class AddBookIntoCart {
     private WebDriver driver;
     private static ExtentReports extent;
     private ExtentTest test;
